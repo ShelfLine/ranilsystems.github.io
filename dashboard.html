@@ -236,7 +236,6 @@
             background: #1d4ed8;
         }
 
-        /* BULLETPROOF MOBILE VIEW: Stacks navigation cleanly on mobile screens */
         @media(max-width: 768px) {
             body {
                 flex-direction: column;
@@ -245,20 +244,20 @@
                 width: 100%;
                 height: auto;
                 padding: 1.2rem;
-                display: block; /* Changes from flex to block to prevent clipping */
+                display: block;
             }
             aside .logo {
                 margin-bottom: 1rem;
             }
             aside nav {
                 display: flex;
-                flex-direction: column; /* Stacks links vertically so nothing is hidden */
+                flex-direction: column;
                 gap: 8px;
                 margin-bottom: 1rem;
             }
             aside nav a {
                 padding: 0.7rem 1rem;
-                background: rgba(255, 255, 255, 0.08); /* Clear button background */
+                background: rgba(255, 255, 255, 0.08);
             }
             .logout-btn {
                 display: block;
@@ -285,7 +284,6 @@
             </div>
             <nav>
                 <a href="dashboard.html" class="active"><i class="fa-solid fa-house"></i> Dashboard</a>
-                <!-- <a href="admin.html"><i class="fa-solid fa-user-shield"></i> Admin Panel</a> -->
                 <a href="index.html"><i class="fa-solid fa-globe"></i> Main Website</a>
             </nav>
         </div>
@@ -311,8 +309,10 @@
                         <thead>
                             <tr>
                                 <th>Service Type</th>
+                                <th>Installation Address</th> <!-- ADDED COLUMN -->
                                 <th>Preferred Date</th>
                                 <th>Status</th>
+                                <th>Updates</th> <!-- ADDED COLUMN FOR ADMIN BUTTON -->
                             </tr>
                         </thead>
                         <tbody id="booking-table-body">
@@ -331,17 +331,16 @@
                         <div class="form-group">
                             <label>Select Service</label>
                             <select id="serviceType" required>
-    <option value="">Select a service</option>
-    <option value="CCTV Installation">CCTV Installation</option>
-    <option value="CCTV Repair">CCTV Repair</option>
-    <option value="Camera Replacement">Camera Replacement</option>
-    <option value="AMC / Maintenance">AMC / Maintenance</option>
-    <option value="Site Survey">Site Survey</option>
-    <option value="DVR / NVR Installation">DVR / NVR Installation</option>
-    <option value="IP Camera Setup">IP Camera Setup</option>
-    <option value="Video Doorbell Installation">Video Doorbell Installation</option>
-</select>
-
+                                <option value="">Select a service</option>
+                                <option value="CCTV Installation">CCTV Installation</option>
+                                <option value="CCTV Repair">CCTV Repair</option>
+                                <option value="Camera Replacement">Camera Replacement</option>
+                                <option value="AMC / Maintenance">AMC / Maintenance</option>
+                                <option value="Site Survey">Site Survey</option>
+                                <option value="DVR / NVR Installation">DVR / NVR Installation</option>
+                                <option value="IP Camera Setup">IP Camera Setup</option>
+                                <option value="Video Doorbell Installation">Video Doorbell Installation</option>
+                            </select>
                         </div>
                         <div class="form-group">
                             <label>Preferred Date</label>
@@ -368,7 +367,6 @@
             const savedBookings = localStorage.getItem('ranil_bookings');
             
             if (savedBookings) {
-                // If there are saved bookings, clear the default ones and load saved ones
                 tableBody.innerHTML = savedBookings;
             }
         }
@@ -378,28 +376,27 @@
             localStorage.setItem('ranil_bookings', tableBody.innerHTML);
         }
 
-        // Run loadBookings as soon as the page loads
         window.onload = loadBookings;
 
         // 3. Handle new form submission
         form.addEventListener('submit', function(e) {
-            e.preventDefault(); // Prevent page reload
+            e.preventDefault(); 
 
+            // GRABBING ALL THREE VALUES NOW
             const service = document.getElementById('serviceType').value;
+            const address = document.getElementById('serviceAddress').value; 
             const date = document.getElementById('serviceDate').value;
 
-            // Create new table row dynamically
+            // CREATING A FULL 4-COLUMN ROW
             const newRow = document.createElement('tr');
             newRow.innerHTML = `
                 <td>${service}</td>
+                <td>${address}</td> 
                 <td>${date}</td>
                 <td><span class="badge pending">Pending Survey</span></td>
             `;
 
-            // Add the new row to the top of the table
             tableBody.prepend(newRow);
-
-            // Save to browser storage immediately
             saveBookings();
 
             alert('Service successfully booked! Saved to browser storage.');
