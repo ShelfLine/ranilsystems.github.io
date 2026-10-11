@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quotation Generator | Ranil Systems</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #0f172a;
+            --accent-color: #2563eb;
+            --bg-color: #f1f5f9;
+            --text-color: #334155;
+            --border-color: #e2e8f0;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; }
+        
+        body { background-color: var(--bg-color); color: var(--text-color); }
+
+        /* Navbar */
+        nav { background: var(--primary-color); color: white; padding: 1rem 5%; display: flex; justify-content: space-between; align-items: center; }
+        .logo { font-size: 1.5rem; font-weight: bold; display: flex; align-items: center; gap: 10px; }
+        .logo i { color: #3b82f6; }
+        .nav-links a { color: white; text-decoration: none; padding: 0.5rem 1rem; border-radius: 6px; background: rgba(255,255,255,0.1); transition: 0.3s; font-size: 0.9rem; }
+        .nav-links a:hover { background: rgba(255,255,255,0.2); }
+
+        .container { display: flex; gap: 2rem; padding: 2rem 5%; flex-wrap: wrap; }
+
+        /* Left Side: Builder Form */
+        .builder { flex: 1; min-width: 400px; background: white; padding: 2rem; border-radius: 12px; box-shadow: 0 4px 6px rgba(0,0,0,0.05); }
+        .builder h2 { color: var(--primary-color); margin-bottom: 1.5rem; border-bottom: 2px solid var(--border-color); padding-bottom: 0.5rem; }
+        
+        .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; }
+        .form-group { margin-bottom: 1rem; }
+        label { display: block; font-size: 0.85rem; font-weight: 600; margin-bottom: 0.3rem; color: var(--primary-color); }
+        input, select { width: 100%; padding: 0.6rem; border: 1px solid var(--border-color); border-radius: 6px; font-size: 0.9rem; outline: none; background: white; }
+        input:focus, select:focus { border-color: var(--accent-color); }
+
+        .item-row { display: grid; grid-template-columns: 3fr 1fr 1fr 1.5fr auto; gap: 10px; margin-bottom: 10px; align-items: center; }
+        .add-btn { background: #10b981; color: white; border: none; padding: 0.6rem 1rem; border-radius: 6px; cursor: pointer; font-weight: bold; width: 100%; margin-top: 10px; }
+        .remove-btn { background: #ef4444; color: white; border: none; padding: 0.6rem; border-radius: 6px; cursor: pointer; }
+
+        .print-btn { background: var(--accent-color); color: white; border: none; padding: 1rem; border-radius: 6px; cursor: pointer; font-weight: bold; width: 100%; margin-top: 2rem; font-size: 1.1rem; transition: 0.3s; }
+        .print-btn:hover { background: #1d4ed8; }
+
+        /* Right Side: A4 Preview */
+        .preview-wrapper { flex: 1.5; min-width: 500px; display: flex; justify-content: center; }
+        .a4-paper { background: white; width: 210mm; min-height: 297mm; padding: 20mm; box-shadow: 0 10px 30px rgba(0,0,0,0.1); color: #000; font-family: 'Segoe UI', sans-serif; }
+        
+        /* Quotation Styling inside A4 */
+        .q-header { display: flex; justify-content: space-between; border-bottom: 3px solid var(--primary-color); padding-bottom: 20px; margin-bottom: 25px; }
+        .q-company h1 { color: var(--primary-color); font-size: 24px; margin-bottom: 5px; }
+        .q-company p { font-size: 12px; color: #555; line-height: 1.4; }
+        .q-title { text-align: right; }
+        .q-title h2 { font-size: 28px; color: #333; letter-spacing: 2px; text-transform: uppercase; }
+        .q-title p { font-size: 12px; margin-top: 5px; }
+
+        /* REDESIGNED QUOTATION FOR SECTION */
+        .q-client { margin-bottom: 35px; }
+        .q-client-box { 
+            background: #ffffff; 
+            padding: 18px 25px; 
+            border: 1px solid #e2e8f0; 
+            border-radius: 8px; 
+            border-left: 5px solid var(--accent-color); 
+            width: 55%; 
+            box-shadow: 0 2px 8px rgba(0,0,0,0.03);
+        }
+        .q-client-box h3 { 
+            font-size: 11px; 
+            letter-spacing: 1px; 
+            color: #64748b; 
+            text-transform: uppercase; 
+            margin-bottom: 8px; 
+            font-weight: 600; 
+        }
+        .q-client-box p { 
+            font-size: 18px; 
+            font-weight: 700; 
+            color: var(--primary-color); 
+            margin-bottom: 4px; 
+        }
+        .q-client-box span { 
+            font-size: 13px; 
+            color: #475569; 
+            line-height: 1.5; 
+            display: block; 
+        }
+
+        .q-table { width: 100%; border-collapse: collapse; margin-bottom: 30px; }
+        .q-table th { background: var(--primary-color); color: white; padding: 12px 10px; text-align: left; font-size: 13px; }
+        .q-table td { padding: 12px 10px; border-bottom: 1px solid #e2e8f0; font-size: 13px; color: #334155; }
+        .q-table th:last-child, .q-table td:last-child { text-align: right; }
+
+        .q-totals { width: 300px; float: right; border-top: 2px solid #333; padding-top: 15px; }
+        .q-totals-row { display: flex; justify-content: space-between; margin-bottom: 8px; font-size: 14px; color: #334155; }
+        .q-totals-row.grand { font-size: 18px; font-weight: bold; color: var(--accent-color); border-top: 1px solid #e2e8f0; padding-top: 12px; margin-top: 8px; }
+
+        .q-footer { clear: both; margin-top: 50px; text-align: center; font-size: 11px; color: #777; border-top: 1px solid #e2e8f0; padding-top: 15px; }
+
+        /* Print Media Query */
+        @media print {
+            body { background: white; }
+            nav, .builder { display: none !important; }
+            .container { padding: 0; margin: 0; display: block; }
+            .preview-wrapper { flex: none; width: 100%; display: block; }
+            .a4-paper { width: 100%; min-height: auto; box-shadow: none; padding: 0; margin: 0; border: none; }
+            .q-client-box { box-shadow: none; border-color: #cbd5e1; }
+        }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <div class="logo"><i class="fa-solid fa-file-invoice-dollar"></i> Quotation Generator</div>
+        <div class="nav-links">
+            <a href="admin.html"><i class="fa-solid fa-arrow-left"></i> Back to Admin</a>
+        </div>
+    </nav>
+
+    <div class="container">
+        <!-- Builder Controls -->
+        <div class="builder">
+            <h2>Quote & Client Details</h2>
+            
+            <div class="form-row">
+                <div class="form-group">
+                    <label>Quotation Number</label>
+                    <input type="text" id="b-invoice" onkeyup="updatePreview()">
+                </div>
+                <div class="form-group">
+                    <label>Quotation Date</label>
+                    <input type="date" id="b-date" onchange="updatePreview()">
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label>Client Name / Company</label>
+                <input type="text" id="b-name" value="John Doe Electronics" onkeyup="updatePreview()">
+            </div>
+            
+            <div class="form-group">
+                <label>Client Address & Phone</label>
+                <input type="text" id="b-address" value="456 Market St, Mumbai | +91 9876543210" onkeyup="updatePreview()">
+            </div>
+
+            <h2 style="margin-top: 2rem;">Items / Services</h2>
+            <div id="items-container">
+                <div class="item-row">
+                    <input type="text" placeholder="Description (e.g. 4K Dome Camera)" class="i-desc" value="4K Dome Camera (Hikvision)" onkeyup="calculate()">
+                    <input type="number" placeholder="Qty" class="i-qty" value="4" onkeyup="calculate()" onchange="calculate()">
+                    <select class="i-unit" onchange="calculate()">
+                        <option value="pcs">pcs</option>
+                        <option value="mtr">mtr</option>
+                        <option value="qty">qty</option>
+                        <option value="nos">nos</option>
+                    </select>
+                    <input type="number" placeholder="Price" class="i-price" value="2500" onkeyup="calculate()" onchange="calculate()">
+                    <button class="remove-btn" onclick="removeItem(this)"><i class="fa-solid fa-xmark"></i></button>
+                </div>
+            </div>
+            <button class="add-btn" onclick="addItem()"><i class="fa-solid fa-plus"></i> Add Another Item</button>
+
+            <h2 style="margin-top: 2rem;">Tax</h2>
+            <div class="form-group">
+                <label>GST Percentage (%)</label>
+                <input type="number" id="b-tax" value="18" onkeyup="calculate()" onchange="calculate()">
+            </div>
+
+            <button class="print-btn" onclick="handlePrintAndSave()"><i class="fa-solid fa-print"></i> Save as PDF / Print Quotation</button>
+        </div>
+
+        <!-- Live Preview A4 Paper -->
+        <div class="preview-wrapper">
+            <div class="a4-paper">
+                
+                <div class="q-header">
+                    <div class="q-company">
+                        <h1>RANIL SYSTEMS</h1>
+                        <p>Virar West Near VIVA College, Maharashtra<br>
+                        Phone: +91 9284676951<br>
+                        Email: ranilsystem@gmail.com</p>
+                    </div>
+                    <div class="q-title">
+                        <h2>QUOTATION</h2>
+                        <p>Date: <span id="p-date">Select Date</span></p>
+                        <p>Quote #: <span id="p-invoice">QT-1001</span></p>
+                    </div>
+                </div>
+
+                <!-- REDESIGNED SECTION -->
+                <div class="q-client">
+                    <div class="q-client-box">
+                        <h3>Quotation Prepared For</h3>
+                        <p id="p-name">Client Name</p>
+                        <span id="p-address">Client Address / Contact info</span>
+                    </div>
+                </div>
+
+                <table class="q-table">
+                    <thead>
+                        <tr>
+                            <th>Description</th>
+                            <th>Qty</th>
+                            <th>Unit Price</th>
+                            <th>Total</th>
+                        </tr>
+                    </thead>
+                    <tbody id="p-table-body">
+                        <!-- Items injected here by JS -->
+                    </tbody>
+                </table>
+
+                <div class="q-totals">
+                    <div class="q-totals-row">
+                        <span>Subtotal:</span>
+                        <span id="p-subtotal">₹0.00</span>
+                    </div>
+                    <div class="q-totals-row">
+                        <span>GST (<span id="p-tax-rate">18</span>%):</span>
+                        <span id="p-tax-amount">₹0.00</span>
+                    </div>
+                    <div class="q-totals-row grand">
+                        <span>Grand Total:</span>
+                        <span id="p-grandtotal">₹0.00</span>
+                    </div>
+                </div>
+
+                <div class="q-footer">
+                    <p><strong>Terms & Conditions:</strong> 50% advance payment required to confirm order. Quotation valid for 15 days. Warranty as per manufacturer terms. Physical damage or burn issues are not covered under warranty.</p>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Set today's date on load
+        document.getElementById('b-date').valueAsDate = new Date();
+        
+        // Sequential Quotation Logic
+        let nextQuoteNum = parseInt(localStorage.getItem('ranil_last_quote_num')) || 1001;
+        document.getElementById('b-invoice').value = 'QT-' + nextQuoteNum;
+
+        function updatePreview() {
+            document.getElementById('p-invoice').innerText = document.getElementById('b-invoice').value;
+            document.getElementById('p-name').innerText = document.getElementById('b-name').value || 'Client Name';
+            document.getElementById('p-address').innerText = document.getElementById('b-address').value || 'Client Address';
+            
+            const dateVal = document.getElementById('b-date').value;
+            if(dateVal) {
+                const formattedDate = new Date(dateVal).toLocaleDateString('en-IN', { day: '2-digit', month: 'short', year: 'numeric' });
+                document.getElementById('p-date').innerText = formattedDate;
+            }
+        }
+
+        function addItem() {
+            const container = document.getElementById('items-container');
+            const row = document.createElement('div');
+            row.className = 'item-row';
+            row.innerHTML = `
+                <input type="text" placeholder="Description" class="i-desc" onkeyup="calculate()">
+                <input type="number" placeholder="Qty" class="i-qty" value="1" onkeyup="calculate()" onchange="calculate()">
+                <select class="i-unit" onchange="calculate()">
+                    <option value="pcs">pcs</option>
+                    <option value="mtr">mtr</option>
+                    <option value="qty">qty</option>
+                    <option value="nos">nos</option>
+                </select>
+                <input type="number" placeholder="Price" class="i-price" value="0" onkeyup="calculate()" onchange="calculate()">
+                <button class="remove-btn" onclick="removeItem(this)"><i class="fa-solid fa-xmark"></i></button>
+            `;
+            container.appendChild(row);
+            calculate();
+        }
+
+        function removeItem(btn) {
+            btn.parentElement.remove();
+            calculate();
+        }
+
+        function calculate() {
+            const rows = document.querySelectorAll('.item-row');
+            const tableBody = document.getElementById('p-table-body');
+            tableBody.innerHTML = ''; 
+            
+            let subtotal = 0;
+
+            rows.forEach(row => {
+                const desc = row.querySelector('.i-desc').value || 'Item';
+                const qty = parseFloat(row.querySelector('.i-qty').value) || 0;
+                const unit = row.querySelector('.i-unit').value; 
+                const price = parseFloat(row.querySelector('.i-price').value) || 0;
+                const total = qty * price;
+                
+                subtotal += total;
+
+                if(qty > 0 || desc !== 'Item') {
+                    tableBody.innerHTML += `
+                        <tr>
+                            <td>${desc}</td>
+                            <td>${qty} ${unit}</td>
+                            <td>₹${price.toLocaleString('en-IN')}</td>
+                            <td>₹${total.toLocaleString('en-IN')}</td>
+                        </tr>
+                    `;
+                }
+            });
+
+            const taxRate = parseFloat(document.getElementById('b-tax').value) || 0;
+            const taxAmount = subtotal * (taxRate / 100);
+            const grandTotal = subtotal + taxAmount;
+
+            document.getElementById('p-tax-rate').innerText = taxRate;
+            document.getElementById('p-subtotal').innerText = '₹' + subtotal.toLocaleString('en-IN', {minimumFractionDigits: 2});
+            document.getElementById('p-tax-amount').innerText = '₹' + taxAmount.toLocaleString('en-IN', {minimumFractionDigits: 2});
+            document.getElementById('p-grandtotal').innerText = '₹' + grandTotal.toLocaleString('en-IN', {minimumFractionDigits: 2});
+        }
+
+        function handlePrintAndSave() {
+            let currentInputVal = document.getElementById('b-invoice').value.replace(/\D/g, '');
+            let numberToSave = parseInt(currentInputVal) || nextQuoteNum;
+            
+            localStorage.setItem('ranil_last_quote_num', numberToSave + 1);
+            window.print();
+        }
+
+        updatePreview();
+        calculate();
+    </script>
+</body>
+</html>
