@@ -161,7 +161,7 @@
         .nav-links {
             display: flex;
             list-style: none;
-            gap: 1.8rem;
+            gap: 2rem;
             align-items: center;
         }
 
@@ -1009,152 +1009,6 @@
             background: var(--accent-hover);
         }
 
-        /* On-Page Instant Cost Estimator / Calculator */
-        .calculator-section {
-            background: linear-gradient(135deg, #0a0f1d 0%, #151f38 100%);
-            color: white;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .calculator-section .section-title {
-            color: white;
-        }
-
-        .calculator-section .section-subtitle {
-            color: #94a3b8;
-        }
-
-        .calc-wrapper {
-            max-width: 950px;
-            margin: 0 auto;
-            background: rgba(255, 255, 255, 0.04);
-            border: 1px solid rgba(255, 255, 255, 0.12);
-            border-radius: var(--radius-xl);
-            padding: 3rem;
-            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
-            backdrop-filter: blur(12px);
-            display: grid;
-            grid-template-columns: 1.2fr 0.8fr;
-            gap: 2.5rem;
-        }
-
-        .calc-form {
-            display: flex;
-            flex-direction: column;
-            gap: 1.5rem;
-        }
-
-        .calc-field label {
-            display: block;
-            font-size: 0.88rem;
-            font-weight: 600;
-            color: #cbd5e1;
-            margin-bottom: 0.6rem;
-        }
-
-        .calc-options-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(110px, 1fr));
-            gap: 0.6rem;
-        }
-
-        .calc-pill {
-            background: rgba(255, 255, 255, 0.08);
-            border: 1px solid rgba(255, 255, 255, 0.15);
-            color: #cbd5e1;
-            padding: 0.65rem 0.8rem;
-            border-radius: var(--radius-lg);
-            cursor: pointer;
-            text-align: center;
-            font-size: 0.88rem;
-            font-weight: 600;
-            transition: var(--transition-smooth);
-            user-select: none;
-        }
-
-        .calc-pill:hover {
-            border-color: #60a5fa;
-            color: white;
-        }
-
-        .calc-pill.selected {
-            background: #2563eb;
-            border-color: #3b82f6;
-            color: white;
-            box-shadow: 0 4px 15px var(--accent-glow);
-        }
-
-        .calc-result-box {
-            background: rgba(15, 23, 42, 0.7);
-            border: 1px solid rgba(255, 255, 255, 0.15);
-            border-radius: var(--radius-lg);
-            padding: 2rem;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-        }
-
-        .calc-result-header h4 {
-            font-size: 1.1rem;
-            color: #93c5fd;
-            margin-bottom: 0.4rem;
-        }
-
-        .calc-result-price {
-            font-size: 2.6rem;
-            font-weight: 800;
-            color: white;
-            line-height: 1.2;
-            margin: 0.8rem 0;
-        }
-
-        .calc-result-price span {
-            font-size: 1rem;
-            color: #94a3b8;
-            font-weight: 500;
-        }
-
-        .calc-breakdown {
-            list-style: none;
-            display: flex;
-            flex-direction: column;
-            gap: 0.6rem;
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
-            padding-top: 1rem;
-            margin-bottom: 1.5rem;
-            font-size: 0.85rem;
-            color: #cbd5e1;
-        }
-
-        .calc-breakdown li {
-            display: flex;
-            justify-content: space-between;
-        }
-
-        .btn-calc-wa {
-            background: #25d366;
-            color: white;
-            padding: 0.85rem;
-            border-radius: var(--radius-full);
-            text-align: center;
-            font-weight: 700;
-            font-size: 0.95rem;
-            text-decoration: none;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 8px;
-            transition: var(--transition-smooth);
-            box-shadow: 0 4px 15px rgba(37, 211, 102, 0.3);
-        }
-
-        .btn-calc-wa:hover {
-            background: #22c55e;
-            transform: translateY(-2px);
-            color: white;
-        }
-
         /* Why Choose Us */
         .why-us-section {
             background: #0f172a;
@@ -1546,7 +1400,6 @@
             .hero-visual { max-width: 600px; margin: 0 auto; }
             .stats-grid { grid-template-columns: repeat(2, 1fr); gap: 1.5rem; }
             .stat-box { border-right: none; }
-            .calc-wrapper { grid-template-columns: 1fr; padding: 2rem; }
             .packages-grid { grid-template-columns: 1fr; }
             .package-card.popular { transform: none; }
             .contact-layout { grid-template-columns: 1fr; padding: 2.5rem; }
@@ -1595,15 +1448,14 @@
                 <li><a href="#services">Services</a></li>
                 <li><a href="#products">Products</a></li>
                 <li><a href="#packages">Packages</a></li>
-                <li><a href="#calculator">Cost Calculator</a></li>
                 <li><a href="#why-us">Why Us</a></li>
                 <li><a href="#contact">Contact</a></li>
             </ul>
         </nav>
 
         <div class="header-actions">
-            <a href="#calculator" class="btn-outline-header">
-                <i class="fa-solid fa-calculator"></i> Quick Estimate
+            <a href="#contact" class="btn-outline-header">
+                <i class="fa-solid fa-calendar-check"></i> Book Survey
             </a>
             <a href="https://wa.me/919284676951?text=Hello%20Ranil%20Systems,%20I%20would%20like%20to%20inquire%20about%20CCTV%20installation." target="_blank" class="btn-primary-header">
                 <i class="fa-brands fa-whatsapp"></i> WhatsApp Us
@@ -1622,13 +1474,12 @@
             <li><a href="#services" class="mobile-link">Services</a></li>
             <li><a href="#products" class="mobile-link">Products</a></li>
             <li><a href="#packages" class="mobile-link">Packages</a></li>
-            <li><a href="#calculator" class="mobile-link">Cost Calculator</a></li>
             <li><a href="#why-us" class="mobile-link">Why Us</a></li>
             <li><a href="#contact" class="mobile-link">Contact</a></li>
         </ul>
         <div class="mobile-menu-actions">
-            <a href="#calculator" class="btn-cta-secondary" style="justify-content: center;">
-                <i class="fa-solid fa-calculator"></i> Instant Cost Estimator
+            <a href="#packages" class="btn-cta-secondary" style="justify-content: center;">
+                <i class="fa-solid fa-boxes-packing"></i> View Packages
             </a>
             <a href="tel:+919284676951" class="btn-cta-primary" style="justify-content: center;">
                 <i class="fa-solid fa-phone"></i> Call Now (+91 9284676951)
@@ -1650,8 +1501,8 @@
                     <a href="#contact" class="btn-cta-primary">
                         <i class="fa-solid fa-calendar-check"></i> Book Free Site Survey
                     </a>
-                    <a href="#calculator" class="btn-cta-secondary">
-                        <i class="fa-solid fa-calculator"></i> Calculate Estimate
+                    <a href="#packages" class="btn-cta-secondary">
+                        <i class="fa-solid fa-boxes-packing"></i> View Packages
                     </a>
                 </div>
 
@@ -2047,74 +1898,6 @@
         </div>
     </section>
 
-    <!-- On-Page Instant Cost Estimator Section -->
-    <section id="calculator" class="calculator-section">
-        <div class="container">
-            <div class="section-header reveal">
-                <span class="section-tag" style="background: rgba(59, 130, 246, 0.2); color: #93c5fd;">Interactive Tool</span>
-                <h2 class="section-title">Instant CCTV Cost Estimator</h2>
-                <p class="section-subtitle">Select your requirements below to calculate an instant approximate estimate for hardware, accessories, and installation.</p>
-            </div>
-
-            <div class="calc-wrapper reveal">
-                <div class="calc-form">
-                    <!-- Cameras count -->
-                    <div class="calc-field">
-                        <label><i class="fa-solid fa-video" style="color: #60a5fa; margin-right: 6px;"></i> Number of Cameras:</label>
-                        <div class="calc-options-grid" id="cam-count-selector">
-                            <div class="calc-pill" data-cams="2" onclick="setCamCount(2)">2 Cameras</div>
-                            <div class="calc-pill selected" data-cams="4" onclick="setCamCount(4)">4 Cameras</div>
-                            <div class="calc-pill" data-cams="8" onclick="setCamCount(8)">8 Cameras</div>
-                            <div class="calc-pill" data-cams="16" onclick="setCamCount(16)">16 Cameras</div>
-                        </div>
-                    </div>
-
-                    <!-- Camera Type -->
-                    <div class="calc-field">
-                        <label><i class="fa-solid fa-eye" style="color: #60a5fa; margin-right: 6px;"></i> Camera Technology:</label>
-                        <div class="calc-options-grid" id="cam-type-selector">
-                            <div class="calc-pill selected" data-tech="hd" onclick="setCamTech('hd')">2MP Full HD</div>
-                            <div class="calc-pill" data-tech="colorvu" onclick="setCamTech('colorvu')">5MP ColorVu (24/7 Color)</div>
-                            <div class="calc-pill" data-tech="ip" onclick="setCamTech('ip')">4K IP Digital</div>
-                        </div>
-                    </div>
-
-                    <!-- Storage -->
-                    <div class="calc-field">
-                        <label><i class="fa-solid fa-hard-drive" style="color: #60a5fa; margin-right: 6px;"></i> Storage Duration:</label>
-                        <div class="calc-options-grid" id="hdd-selector">
-                            <div class="calc-pill" data-hdd="500" onclick="setStorage('500')">500GB (~7 Days)</div>
-                            <div class="calc-pill selected" data-hdd="1000" onclick="setStorage('1000')">1TB (~15-20 Days)</div>
-                            <div class="calc-pill" data-hdd="2000" onclick="setStorage('2000')">2TB (~30+ Days)</div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Result Box -->
-                <div class="calc-result-box">
-                    <div class="calc-result-header">
-                        <h4>Estimated Turnkey Total</h4>
-                        <div class="calc-result-price" id="calc-price-display">₹15,500*</div>
-                        <p style="font-size: 0.8rem; color: #94a3b8;">*Approximate turnkey price including cameras, DVR/NVR, HDD, power supply & standard labor.</p>
-                    </div>
-
-                    <div>
-                        <ul class="calc-breakdown">
-                            <li><span>Configuration:</span> <strong id="summary-cams">4 Cameras (2MP HD)</strong></li>
-                            <li><span>Hard Drive:</span> <strong id="summary-hdd">1TB Surveillance Drive</strong></li>
-                            <li><span>Mobile Remote View:</span> <strong style="color: #34d399;">Free Included</strong></li>
-                            <li><span>Installation & Cabling:</span> <strong>Full Concealed Setup</strong></li>
-                        </ul>
-
-                        <a href="javascript:void(0)" onclick="sendCalcToWhatsApp()" class="btn-calc-wa">
-                            <i class="fa-brands fa-whatsapp"></i> Book This Estimate on WhatsApp
-                        </a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
     <!-- Why Choose Us -->
     <section id="why-us" class="why-us-section">
         <div class="container">
@@ -2354,7 +2137,7 @@
                     <li><a href="#services">Security Services</a></li>
                     <li><a href="#products">Hardware Catalog</a></li>
                     <li><a href="#packages">CCTV Price Packages</a></li>
-                    <li><a href="#calculator">Instant Cost Estimator</a></li>
+                    <li><a href="#why-us">Why Choose Us</a></li>
                     <li><a href="#contact">Book Free Site Survey</a></li>
                 </ul>
             </div>
@@ -2443,111 +2226,7 @@
                     });
                 }
             });
-
-            // Run initial calculator update
-            updateCalculator();
         });
-
-        // Interactive Cost Estimator State
-        let calcState = {
-            cams: 4,
-            tech: 'hd',
-            hdd: '1000'
-        };
-
-        function setCamCount(count) {
-            calcState.cams = count;
-            document.querySelectorAll('#cam-count-selector .calc-pill').forEach(el => {
-                el.classList.toggle('selected', parseInt(el.getAttribute('data-cams')) === count);
-            });
-            updateCalculator();
-        }
-
-        function setCamTech(tech) {
-            calcState.tech = tech;
-            document.querySelectorAll('#cam-type-selector .calc-pill').forEach(el => {
-                el.classList.toggle('selected', el.getAttribute('data-tech') === tech);
-            });
-            updateCalculator();
-        }
-
-        function setStorage(hdd) {
-            calcState.hdd = hdd;
-            document.querySelectorAll('#hdd-selector .calc-pill').forEach(el => {
-                el.classList.toggle('selected', el.getAttribute('data-hdd') === hdd);
-            });
-            updateCalculator();
-        }
-
-        function updateCalculator() {
-            // Base price table
-            const pricing = {
-                2: { hd: 9500, colorvu: 11500, ip: 14500 },
-                4: { hd: 15500, colorvu: 18500, ip: 23500 },
-                8: { hd: 27500, colorvu: 33000, ip: 42000 },
-                16: { hd: 49500, colorvu: 59000, ip: 78000 }
-            };
-
-            const hddDelta = {
-                '500': -600,
-                '1000': 0,
-                '2000': 1800
-            };
-
-            let base = pricing[calcState.cams][calcState.tech] || 15500;
-            let total = base + (hddDelta[calcState.hdd] || 0);
-
-            // Update UI elements
-            const displayEl = document.getElementById('calc-price-display');
-            if (displayEl) {
-                displayEl.textContent = '₹' + total.toLocaleString('en-IN') + '*';
-            }
-
-            const techLabels = {
-                'hd': '2MP Full HD',
-                'colorvu': '5MP ColorVu (24/7 Color)',
-                'ip': '4K IP Digital'
-            };
-
-            const hddLabels = {
-                '500': '500GB HDD',
-                '1000': '1TB Surveillance Drive',
-                '2000': '2TB High Endurance Drive'
-            };
-
-            const summaryCams = document.getElementById('summary-cams');
-            if (summaryCams) {
-                summaryCams.textContent = `${calcState.cams} Cameras (${techLabels[calcState.tech]})`;
-            }
-
-            const summaryHdd = document.getElementById('summary-hdd');
-            if (summaryHdd) {
-                summaryHdd.textContent = hddLabels[calcState.hdd];
-            }
-        }
-
-        function sendCalcToWhatsApp() {
-            const techLabels = {
-                'hd': '2MP Full HD',
-                'colorvu': '5MP ColorVu Night',
-                'ip': '4K IP Digital'
-            };
-            const hddLabels = {
-                '500': '500GB HDD',
-                '1000': '1TB HDD',
-                '2000': '2TB HDD'
-            };
-            const price = document.getElementById('calc-price-display').textContent;
-
-            const text = `*Ranil Systems - Online Estimate Request*%0A` +
-                         `*Number of Cameras:* ${calcState.cams}%0A` +
-                         `*Camera Type:* ${techLabels[calcState.tech]}%0A` +
-                         `*Storage:* ${hddLabels[calcState.hdd]}%0A` +
-                         `*Estimated Cost:* ${price}%0A` +
-                         `*Details:* Please confirm site survey and availability.`;
-
-            window.open(`https://wa.me/919284676951?text=${text}`, '_blank');
-        }
 
         // Form Submission to WhatsApp
         function handleInquirySubmit(event) {
