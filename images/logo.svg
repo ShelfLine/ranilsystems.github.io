@@ -1,0 +1,102 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 460 100" width="100%" height="100%">
+  <defs>
+    <!-- Gradients -->
+    <linearGradient id="shieldGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#1d4ed8"/>
+      <stop offset="50%" stop-color="#2563eb"/>
+      <stop offset="100%" stop-color="#0284c7"/>
+    </linearGradient>
+    <linearGradient id="glowGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#60a5fa" stop-opacity="0.8"/>
+      <stop offset="100%" stop-color="#38bdf8" stop-opacity="0.2"/>
+    </linearGradient>
+    <linearGradient id="camGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0f172a"/>
+      <stop offset="100%" stop-color="#1e293b"/>
+    </linearGradient>
+    <linearGradient id="accentCyan" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#38bdf8"/>
+      <stop offset="100%" stop-color="#06b6d4"/>
+    </linearGradient>
+    <!-- Drop Shadow Filter -->
+    <filter id="logoShadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="4" stdDeviation="6" flood-color="#2563eb" flood-opacity="0.35"/>
+    </filter>
+  </defs>
+
+  <!-- ICON BADGE (Shield + CCTV Camera) -->
+  <g transform="translate(10, 10)" filter="url(#logoShadow)">
+    <!-- Shield Outer Crest -->
+    <path d="M 40 4 
+             C 65 4, 76 14, 76 22 
+             C 76 56, 40 76, 40 76 
+             C 40 76, 4 56, 4 22 
+             C 4 14, 15 4, 40 4 Z" 
+          fill="url(#shieldGrad)" />
+
+    <!-- Shield Inner Border Highlight -->
+    <path d="M 40 8 
+             C 61 8, 71 16, 71 23 
+             C 71 52, 40 70, 40 70 
+             C 40 70, 9 52, 9 23 
+             C 9 16, 19 8, 40 8 Z" 
+          fill="none" 
+          stroke="url(#glowGrad)" 
+          stroke-width="1.8" />
+
+    <!-- CCTV Camera Dome Body -->
+    <circle cx="40" cy="36" r="19" fill="url(#camGrad)" stroke="#38bdf8" stroke-width="2"/>
+    
+    <!-- Camera Aperture / Lens Rings -->
+    <circle cx="40" cy="36" r="13" fill="#090d16" stroke="rgba(255,255,255,0.2)" stroke-width="1.2"/>
+    <circle cx="40" cy="36" r="8" fill="url(#shieldGrad)"/>
+    <circle cx="40" cy="36" r="4" fill="#0284c7"/>
+    
+    <!-- Lens Reflection -->
+    <circle cx="38" cy="34" r="1.8" fill="#ffffff" opacity="0.9"/>
+    
+    <!-- Red Recording Status Blinking Dot -->
+    <circle cx="53" cy="23" r="2.8" fill="#ef4444"/>
+    <circle cx="53" cy="23" r="4.5" fill="none" stroke="#ef4444" stroke-width="1" opacity="0.5"/>
+
+    <!-- Tech Circuit Lines on Shield Base -->
+    <path d="M 28 55 L 40 63 L 52 55" fill="none" stroke="url(#accentCyan)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+    <line x1="40" y1="63" x2="40" y2="68" stroke="url(#accentCyan)" stroke-width="2" stroke-linecap="round"/>
+  </g>
+
+  <!-- BRAND TYPOGRAPHY -->
+  <g transform="translate(106, 0)">
+    <!-- "RANIL" -->
+    <text x="0" y="52" 
+          font-family="'Plus Jakarta Sans', 'Inter', -apple-system, BlinkMacSystemFont, sans-serif" 
+          font-size="36" 
+          font-weight="800" 
+          letter-spacing="-0.5" 
+          fill="#ffffff">
+      RANIL
+    </text>
+
+    <!-- "SYSTEMS" -->
+    <text x="122" y="52" 
+          font-family="'Plus Jakarta Sans', 'Inter', -apple-system, BlinkMacSystemFont, sans-serif" 
+          font-size="36" 
+          font-weight="800" 
+          letter-spacing="-0.5" 
+          fill="#38bdf8">
+      SYSTEMS
+    </text>
+
+    <!-- Sub-tagline -->
+    <text x="2" y="76" 
+          font-family="'Plus Jakarta Sans', 'Inter', -apple-system, BlinkMacSystemFont, sans-serif" 
+          font-size="10.5" 
+          font-weight="700" 
+          letter-spacing="3.2" 
+          fill="#94a3b8">
+      CCTV &amp; SECURITY SOLUTIONS
+    </text>
+
+    <!-- Subtle Accent Line -->
+    <rect x="2" y="84" width="220" height="2" rx="1" fill="url(#shieldGrad)" opacity="0.8"/>
+  </g>
+</svg>

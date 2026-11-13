@@ -1,0 +1,63 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="100%" height="100%">
+  <defs>
+    <linearGradient id="iconShieldGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#1d4ed8"/>
+      <stop offset="50%" stop-color="#2563eb"/>
+      <stop offset="100%" stop-color="#0284c7"/>
+    </linearGradient>
+    <linearGradient id="iconGlowGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#60a5fa" stop-opacity="0.9"/>
+      <stop offset="100%" stop-color="#38bdf8" stop-opacity="0.3"/>
+    </linearGradient>
+    <linearGradient id="iconCamGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0a0f1d"/>
+      <stop offset="100%" stop-color="#1e293b"/>
+    </linearGradient>
+    <linearGradient id="iconAccentCyan" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#38bdf8"/>
+      <stop offset="100%" stop-color="#06b6d4"/>
+    </linearGradient>
+    <filter id="iconShadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="5" stdDeviation="6" flood-color="#2563eb" flood-opacity="0.4"/>
+    </filter>
+  </defs>
+
+  <g transform="translate(6, 6)" filter="url(#iconShadow)">
+    <!-- Shield Outer Crest -->
+    <path d="M 44 4 
+             C 71 4, 83 15, 83 24 
+             C 83 61, 44 83, 44 83 
+             C 44 83, 5 61, 5 24 
+             C 5 15, 17 4, 44 4 Z" 
+          fill="url(#iconShieldGrad)" />
+
+    <!-- Inner Border Highlight -->
+    <path d="M 44 8 
+             C 67 8, 77 17, 77 25 
+             C 77 57, 44 77, 44 77 
+             C 44 77, 11 57, 11 25 
+             C 11 17, 21 8, 44 8 Z" 
+          fill="none" 
+          stroke="url(#iconGlowGrad)" 
+          stroke-width="2" />
+
+    <!-- CCTV Camera Dome Body -->
+    <circle cx="44" cy="39" r="21" fill="url(#iconCamGrad)" stroke="#38bdf8" stroke-width="2.2"/>
+    
+    <!-- Camera Aperture / Lens Rings -->
+    <circle cx="44" cy="39" r="14" fill="#060911" stroke="rgba(255,255,255,0.25)" stroke-width="1.4"/>
+    <circle cx="44" cy="39" r="8.5" fill="url(#iconShieldGrad)"/>
+    <circle cx="44" cy="39" r="4.2" fill="#38bdf8"/>
+    
+    <!-- Lens Reflection Dot -->
+    <circle cx="41.5" cy="36.5" r="2" fill="#ffffff" opacity="0.95"/>
+    
+    <!-- Red Recording Status Dot -->
+    <circle cx="58" cy="25" r="3" fill="#ef4444"/>
+    <circle cx="58" cy="25" r="5" fill="none" stroke="#ef4444" stroke-width="1.2" opacity="0.6"/>
+
+    <!-- Tech Circuit Lines on Base -->
+    <path d="M 30 60 L 44 69 L 58 60" fill="none" stroke="url(#iconAccentCyan)" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+    <line x1="44" y1="69" x2="44" y2="75" stroke="url(#iconAccentCyan)" stroke-width="2.2" stroke-linecap="round"/>
+  </g>
+</svg>
