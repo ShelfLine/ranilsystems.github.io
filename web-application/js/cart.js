@@ -118,21 +118,38 @@ class CartManager {
       }
 
       const storedCart = localStorage.getItem(CART_STORAGE_KEY);
-      this.cartItems = storedCart ? JSON.parse(storedCart) : [
-        {
-          cartItemId: 'item-demo-1',
-          productId: 'rs-cctv-01',
-          name: 'Ranil Pro 4K Ultra-HD Smart AI IP Dome Camera',
-          modelNo: 'RS-IPC-4K-DOME',
-          color: 'Vandal Matte White',
-          size: '4.0mm Standard (88° FOV)',
-          image: 'https://images.unsplash.com/photo-1557597774-9d273605dfa9?auto=format&fit=crop&w=600&q=80',
-          quantity: 2
+      if (storedCart) {
+        try {
+          const parsed = JSON.parse(storedCart);
+          // Purge any legacy demo item (cartItemId: item-demo-1)
+          this.cartItems = Array.isArray(parsed) ? parsed.filter(i => i && i.cartItemId !== 'item-demo-1') : [];
+        } catch (e) {
+          this.cartItems = [];
         }
-      ];
+      } else {
+        this.cartItems = [];
+      }
 
       const storedWishlist = localStorage.getItem(WISHLIST_STORAGE_KEY);
-      this.wishlist = storedWishlist ? JSON.parse(storedWishlist) : ['rs-net-01'];
+      if (storedWishlist) {
+        try {
+          const parsed = JSON.parse(storedWishlist);
+          // Purge legacy demo seed ['rs-net-01'] if user hasn't explicitly customized wishlist
+          if (Array.isArray(parsed) && parsed.length === 1 && parsed[0] === 'rs-net-01' && !localStorage.getItem('ranil_wishlist_customized')) {
+            this.wishlist = [];
+          } else {
+            this.wishlist = Array.isArray(parsed) ? parsed : [];
+          }
+        } catch (e) {
+          this.wishlist = [];
+        }
+      } else {
+        this.wishlist = [];
+      }
+
+      // Sync cleaned empty state back to localStorage
+      localStorage.setItem(CART_STORAGE_KEY, JSON.stringify(this.cartItems));
+      localStorage.setItem(WISHLIST_STORAGE_KEY, JSON.stringify(this.wishlist));
 
       // Initialize orders log if empty
       if (!localStorage.getItem(INQUIRIES_STORAGE_KEY)) {
@@ -243,6 +260,9 @@ class CartManager {
   }
 
   toggleWishlist(productId) {
+    try {
+      localStorage.setItem('ranil_wishlist_customized', 'true');
+    } catch (e) {}
     const idx = this.wishlist.indexOf(productId);
     let added = false;
     if (idx > -1) {

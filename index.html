@@ -308,6 +308,15 @@
             color: #0f172a;
         }
 
+        @keyframes floatShoppingGentle {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-6px);
+            }
+        }
+
         .floating-shopping-btn {
             position: fixed;
             bottom: 95px; /* Placed by default on the right side above WhatsApp button */
@@ -324,30 +333,37 @@
             align-items: center;
             gap: 9px;
             text-decoration: none;
-            box-shadow: 0 8px 25px rgba(245, 158, 11, 0.5);
+            box-shadow: 0 8px 25px rgba(245, 158, 11, 0.45);
             border: 2px solid rgba(255, 255, 255, 0.35);
             cursor: grab;
             user-select: none;
             -webkit-user-select: none;
             touch-action: none;
-            transition: box-shadow 0.2s ease, transform 0.2s ease;
             white-space: nowrap;
-        }
-
-        .floating-shopping-btn:active,
-        .floating-shopping-btn.is-dragging {
-            cursor: grabbing;
-            transform: scale(1.06);
-            box-shadow: 0 16px 36px rgba(245, 158, 11, 0.7);
-            transition: none !important;
-            animation: none !important;
+            will-change: transform, left, top;
+            animation: floatShoppingGentle 3s ease-in-out infinite;
+            transition: box-shadow 0.25s ease, background 0.25s ease, transform 0.2s ease;
         }
 
         .floating-shopping-btn:hover:not(.is-dragging) {
-            transform: translateY(-3px) scale(1.03);
-            box-shadow: 0 12px 30px rgba(245, 158, 11, 0.65);
+            animation-play-state: paused;
+            transform: translateY(-4px) scale(1.03);
+            box-shadow: 0 14px 32px rgba(245, 158, 11, 0.65);
             background: linear-gradient(135deg, #fbbf24, #f59e0b);
             color: #0f172a;
+        }
+
+        .floating-shopping-btn.is-dragging {
+            cursor: grabbing !important;
+            animation: none !important;
+            box-shadow: 0 20px 42px rgba(245, 158, 11, 0.75) !important;
+            transition: none !important;
+            opacity: 0.95;
+            transform: scale(1.05);
+        }
+
+        .floating-shopping-btn.is-snapping {
+            transition: left 0.35s cubic-bezier(0.2, 0.9, 0.3, 1), top 0.35s cubic-bezier(0.2, 0.9, 0.3, 1), box-shadow 0.25s ease !important;
         }
 
         .products-catalog-banner {
@@ -391,9 +407,11 @@
         }
 
         @media (max-width: 600px) {
-            .floating-shopping-btn {
+            .floating-shopping-btn:not(.is-moved) {
                 bottom: 90px;
                 right: 20px;
+            }
+            .floating-shopping-btn {
                 padding: 9px 16px;
                 font-size: 0.82rem;
             }
@@ -1722,11 +1740,14 @@
                 right: 18px !important;
             }
 
+            .floating-shopping-btn:not(.is-moved) {
+                bottom: 82px;
+                right: 18px;
+            }
+
             .floating-shopping-btn {
-                bottom: 82px !important;
-                right: 18px !important;
-                padding: 9px 15px !important;
-                font-size: 0.8rem !important;
+                padding: 9px 15px;
+                font-size: 0.8rem;
             }
         }
     </style>
@@ -1744,7 +1765,7 @@
                 <i class="fa-solid fa-cart-shopping"></i> Shopping / Order Store
             </a>
             <a href="tel:+919284676951"><i class="fa-solid fa-phone"></i> +91 9284676951</a>
-            <a href="mailto:ranilsystem@gmail.com"><i class="fa-solid fa-envelope"></i> ranilsystem@gmail.com</a>
+            <a href="mailto:ranilsystems@gmail.com"><i class="fa-solid fa-envelope"></i> ranilsystems@gmail.com</a>
         </div>
     </div>
 
@@ -2361,7 +2382,7 @@
                             </div>
                             <div class="channel-details">
                                 <h4>Email Inquiries</h4>
-                                <a href="mailto:ranilsystem@gmail.com">ranilsystem@gmail.com</a>
+                                <a href="mailto:ranilsystems@gmail.com">ranilsystems@gmail.com</a>
                             </div>
                         </div>
 
@@ -2452,7 +2473,7 @@
                 <div style="display: flex; gap: 12px; font-size: 1.2rem;">
                     <a href="https://wa.me/919284676951" target="_blank" style="color: #25d366;"><i class="fa-brands fa-whatsapp"></i></a>
                     <a href="tel:+919284676951" style="color: #60a5fa;"><i class="fa-solid fa-phone"></i></a>
-                    <a href="mailto:ranilsystem@gmail.com" style="color: #cbd5e1;"><i class="fa-solid fa-envelope"></i></a>
+                    <a href="mailto:ranilsystems@gmail.com" style="color: #cbd5e1;"><i class="fa-solid fa-envelope"></i></a>
                 </div>
             </div>
 
@@ -2484,7 +2505,7 @@
                 <h4>Contact Details</h4>
                 <p><i class="fa-solid fa-location-dot" style="color: #3b82f6;"></i> Virar West Near VIVA College, Palghar / Mumbai - 401303</p>
                 <p><i class="fa-solid fa-phone" style="color: #10b981;"></i> +91 9284676951</p>
-                <p><i class="fa-solid fa-envelope" style="color: #f59e0b;"></i> ranilsystem@gmail.com</p>
+                <p><i class="fa-solid fa-envelope" style="color: #f59e0b;"></i> ranilsystems@gmail.com</p>
                 <p><i class="fa-solid fa-clock" style="color: #cbd5e1;"></i> Mon - Sat: 10:00 AM - 07:00 PM</p>
             </div>
         </div>
@@ -2521,68 +2542,134 @@
             if (!btn) return;
 
             let isDragging = false;
-            let startX = 0, startY = 0;
-            let initialLeft = 0, initialTop = 0;
+            let startPointerX = 0, startPointerY = 0;
+            let startBtnLeft = 0, startBtnTop = 0;
             let hasMoved = false;
+            let rafId = null;
+            let targetX = 0, targetY = 0;
 
-            btn.addEventListener('pointerdown', (e) => {
+            const getPointerPos = (e) => {
+                if (e.touches && e.touches.length > 0) {
+                    return { x: e.touches[0].clientX, y: e.touches[0].clientY };
+                }
+                return { x: e.clientX, y: e.clientY };
+            };
+
+            const onStart = (e) => {
                 if (e.button && e.button !== 0) return;
+                const pos = getPointerPos(e);
                 isDragging = true;
                 hasMoved = false;
-                startX = e.clientX;
-                startY = e.clientY;
+                startPointerX = pos.x;
+                startPointerY = pos.y;
 
                 const rect = btn.getBoundingClientRect();
-                initialLeft = rect.left;
-                initialTop = rect.top;
+                startBtnLeft = rect.left;
+                startBtnTop = rect.top;
+                targetX = startBtnLeft;
+                targetY = startBtnTop;
 
                 btn.classList.add('is-dragging');
-                try { btn.setPointerCapture(e.pointerId); } catch (err) {}
-            });
+                btn.classList.remove('is-snapping');
 
-            btn.addEventListener('pointermove', (e) => {
+                if (e.pointerId && btn.setPointerCapture) {
+                    try { btn.setPointerCapture(e.pointerId); } catch (err) {}
+                }
+            };
+
+            const updatePosition = () => {
                 if (!isDragging) return;
-                const dx = e.clientX - startX;
-                const dy = e.clientY - startY;
+                btn.classList.add('is-moved');
+                btn.style.setProperty('left', targetX + 'px', 'important');
+                btn.style.setProperty('top', targetY + 'px', 'important');
+                btn.style.setProperty('right', 'auto', 'important');
+                btn.style.setProperty('bottom', 'auto', 'important');
+                rafId = null;
+            };
 
-                if (!hasMoved && Math.hypot(dx, dy) > 6) {
+            const onMove = (e) => {
+                if (!isDragging) return;
+                const pos = getPointerPos(e);
+                const dx = pos.x - startPointerX;
+                const dy = pos.y - startPointerY;
+
+                if (!hasMoved && Math.hypot(dx, dy) > 5) {
                     hasMoved = true;
                 }
 
                 if (hasMoved) {
-                    let newLeft = initialLeft + dx;
-                    let newTop = initialTop + dy;
+                    if (e.cancelable) e.preventDefault(); // Prevent page scroll while dragging button
 
                     const btnW = btn.offsetWidth;
                     const btnH = btn.offsetHeight;
-                    const pad = 10;
+                    const pad = 12;
 
                     const minX = pad;
                     const maxX = window.innerWidth - btnW - pad;
                     const minY = pad;
                     const maxY = window.innerHeight - btnH - pad;
 
-                    newLeft = Math.max(minX, Math.min(newLeft, maxX));
-                    newTop = Math.max(minY, Math.min(newTop, maxY));
+                    targetX = Math.max(minX, Math.min(startBtnLeft + dx, maxX));
+                    targetY = Math.max(minY, Math.min(startBtnTop + dy, maxY));
 
-                    btn.style.left = newLeft + 'px';
-                    btn.style.top = newTop + 'px';
-                    btn.style.right = 'auto';
-                    btn.style.bottom = 'auto';
+                    if (!rafId) {
+                        rafId = requestAnimationFrame(updatePosition);
+                    }
                 }
-            });
-
-            const stopDrag = (e) => {
-                if (!isDragging) return;
-                isDragging = false;
-                btn.classList.remove('is-dragging');
-                try { btn.releasePointerCapture(e.pointerId); } catch (err) {}
             };
 
-            btn.addEventListener('pointerup', stopDrag);
-            btn.addEventListener('pointercancel', stopDrag);
+            const onEnd = (e) => {
+                if (!isDragging) return;
+                isDragging = false;
+                if (rafId) {
+                    cancelAnimationFrame(rafId);
+                    rafId = null;
+                }
 
-            // If user moved/dragged the button, prevent opening link
+                btn.classList.remove('is-dragging');
+                if (e.pointerId && btn.releasePointerCapture) {
+                    try { btn.releasePointerCapture(e.pointerId); } catch (err) {}
+                }
+
+                if (hasMoved) {
+                    // Smooth edge snapping if dropped near left/right edge
+                    btn.classList.add('is-snapping');
+                    const btnW = btn.offsetWidth;
+                    const pad = 15;
+                    const centerX = targetX + btnW / 2;
+                    const winW = window.innerWidth;
+
+                    // If released near either side, smoothly glide to the edge
+                    if (centerX < winW * 0.3) {
+                        targetX = pad;
+                    } else if (centerX > winW * 0.7) {
+                        targetX = winW - btnW - pad;
+                    }
+
+                    btn.style.setProperty('left', targetX + 'px', 'important');
+                    btn.style.setProperty('top', targetY + 'px', 'important');
+                    btn.style.setProperty('right', 'auto', 'important');
+                    btn.style.setProperty('bottom', 'auto', 'important');
+
+                    setTimeout(() => {
+                        btn.classList.remove('is-snapping');
+                    }, 350);
+                }
+            };
+
+            // Pointer events
+            btn.addEventListener('pointerdown', onStart);
+            window.addEventListener('pointermove', onMove, { passive: false });
+            window.addEventListener('pointerup', onEnd);
+            window.addEventListener('pointercancel', onEnd);
+
+            // Touch events fallback for maximum mobile smoothness
+            btn.addEventListener('touchstart', onStart, { passive: true });
+            window.addEventListener('touchmove', onMove, { passive: false });
+            window.addEventListener('touchend', onEnd);
+            window.addEventListener('touchcancel', onEnd);
+
+            // Prevent unwanted navigation when dragging
             btn.addEventListener('click', (e) => {
                 if (hasMoved) {
                     e.preventDefault();
