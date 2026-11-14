@@ -1,0 +1,20 @@
+{
+  "name": "ranil-systems-portal",
+  "version": "1.0.0",
+  "description": "Ranil Systems — Enterprise Product Catalog & WhatsApp Order / Quote Portal",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node server.js"
+  },
+  "keywords": [
+    "ranilsystems",
+    "cctv",
+    "networking",
+    "ups",
+    "whatsapp-commerce",
+    "quote-portal"
+  ],
+  "author": "Ranil Systems",
+  "license": "MIT"
+}

@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ranil Systems — Enterprise Surveillance, Networking & Power Marketplace</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🛡️</text></svg>">
+</head>
+<body>
+
+  <!-- Top Utility & Helpline Bar -->
+  <div class="top-utility-bar">
+    <div class="top-utility-container">
+      <div class="utility-left">
+        <span class="utility-badge">OFFICIAL STORE</span>
+        <span>Ranil Systems Direct Hardware Portal</span>
+        <span>•</span>
+        <span>Direct WhatsApp Pricing & Delivery Confirmation</span>
+      </div>
+      <div class="utility-right">
+        <a href="../index.html" style="color: #cbd5e1; font-size: 0.775rem; text-decoration: none; display: inline-flex; align-items: center; gap: 6px; padding: 3px 8px; background: rgba(255,255,255,0.08); border-radius: 4px;">
+          <span>← Main Website</span>
+        </a>
+        <span>💬 Direct Helpline:</span>
+        <a href="https://wa.me/919876543210" target="_blank" rel="noopener" class="whatsapp-helpline-link" id="topbar-whatsapp-link">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981z"/>
+          </svg>
+          <strong id="topbar-whatsapp-number">+919876543210</strong>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Main Navbar (Marketplace Style) -->
+  <header class="main-navbar">
+    <div class="navbar-container">
+      <!-- Logo -->
+      <a href="#" class="navbar-brand">
+        <div class="brand-badge">RS</div>
+        <div class="brand-text">
+          <span class="brand-title">Ranil Systems</span>
+          <span class="brand-subtitle">Commercial Tech Marketplace</span>
+        </div>
+      </a>
+
+      <!-- Search Bar -->
+      <div class="navbar-search">
+        <input type="text" class="search-input-box" id="marketplace-search-input" placeholder="Search 4K CCTV, PoE Switch, UPS, Server Rack, Biometric, Cable...">
+        <button class="search-action-btn" title="Search">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+            <circle cx="11" cy="11" r="8"></circle>
+            <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+          </svg>
+        </button>
+      </div>
+
+      <!-- Action Buttons -->
+      <div class="navbar-actions">
+        <!-- Theme Switcher -->
+        <button class="nav-icon-btn" id="theme-toggle-btn" title="Toggle Dark/Light Mode">
+          <span id="theme-icon">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+            </svg>
+          </span>
+        </button>
+
+        <!-- Wishlist -->
+        <button class="nav-icon-btn" id="wishlist-drawer-trigger" title="Saved Systems">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
+          </svg>
+          <span class="badge-dot" id="header-wishlist-count">0</span>
+        </button>
+
+        <!-- Order Staging List (Cart) -->
+        <button class="cart-order-btn" id="cart-drawer-trigger">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path>
+            <line x1="3" y1="6" x2="21" y2="6"></line>
+            <path d="M16 10a4 4 0 0 1-8 0"></path>
+          </svg>
+          <span>Order List</span>
+          <span class="cart-items-count" id="header-cart-count">2</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Category Navigation Strip -->
+  <nav class="category-nav-strip">
+    <div class="category-nav-container">
+      <button class="category-nav-tab active" data-category="all">⚡ All Categories</button>
+      <button class="category-nav-tab" data-category="cctv">📹 CCTV & Surveillance</button>
+      <button class="category-nav-tab" data-category="networking">🖧 Enterprise Networking</button>
+      <button class="category-nav-tab" data-category="power">⚡ Power & Online UPS</button>
+      <button class="category-nav-tab" data-category="access">👤 Biometric & Access</button>
+      <button class="category-nav-tab" data-category="iot">🌡️ Facility IoT & Cables</button>
+    </div>
+  </nav>
+
+  <!-- Main Body Content -->
+  <main class="main-wrapper">
+    <!-- Marketplace Hero Deal Banner -->
+    <section class="marketplace-hero-banner">
+      <div class="hero-left">
+        <span class="hero-deal-pill">★ DIRECT FACTORY QUOTATION</span>
+        <h1 class="hero-headline">Commercial 4K Surveillance & High-Density Networking Infrastructure</h1>
+        <p class="hero-subheadline">
+          Genuine OEM systems with official warranty. Browse technical specs, stage your equipment order, and receive your quotation & confirmed delivery schedule directly on WhatsApp.
+        </p>
+        <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+          <button class="cart-order-btn" onclick="document.querySelector('[data-category=\'cctv\']')?.click();" style="background: white; color: #1e3a8a;">
+            Explore CCTV Cameras
+          </button>
+          <button class="cart-order-btn" onclick="document.querySelector('[data-category=\'networking\']')?.click();" style="background: rgba(255,255,255,0.15); color: #ffffff; border: 1px solid rgba(255,255,255,0.3);">
+            Enterprise Networking
+          </button>
+        </div>
+      </div>
+      <div class="hero-right-visual">
+        <div style="background: rgba(0,0,0,0.3); padding: 12px 18px; border-radius: var(--radius-md); border: 1px solid rgba(255,255,255,0.2); font-size: 0.85rem; display: flex; flex-direction: column; gap: 4px; text-align: left;">
+          <span>✓ 100% Genuine OEM Hardware</span>
+          <span>✓ Custom Wholesale Quotations</span>
+          <span>✓ On-Site Installation Support</span>
+          <span>✓ Rapid Pan-India Delivery</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- WhatsApp Ordering Flow Strip -->
+    <div class="whatsapp-feature-strip">
+      <div class="wa-strip-left">
+        <div class="wa-icon-large">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981z"/>
+          </svg>
+        </div>
+        <div>
+          <div class="wa-strip-title">Direct WhatsApp Quotation & Delivery Confirmation</div>
+          <div class="wa-strip-desc">Prices are customized per order quantity & delivery location. We review your items and reply with official quotation.</div>
+        </div>
+      </div>
+      <div class="wa-strip-steps">
+        <div class="wa-step-item">
+          <span class="wa-step-dot">1</span>
+          <span>Select Products</span>
+        </div>
+        <span>➔</span>
+        <div class="wa-step-item">
+          <span class="wa-step-dot">2</span>
+          <span>Submit Delivery Details</span>
+        </div>
+        <span>➔</span>
+        <div class="wa-step-item">
+          <span class="wa-step-dot">3</span>
+          <span>Ranil Systems Confirms Price & Delivery</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Product Grid Header -->
+    <div class="section-header-bar">
+      <div class="section-title-wrap">
+        <h2>Commercial Systems & Hardware</h2>
+        <div class="section-results-count" id="results-count-text">Showing verified products</div>
+      </div>
+
+      <div class="sort-dropdown-box">
+        <span style="font-size: 0.85rem; color: var(--text-muted); font-weight: 600;">Sort by:</span>
+        <select class="sort-select-input" id="marketplace-sort-select">
+          <option value="featured">Featured Systems</option>
+          <option value="rating">Top Rated & Verified ★</option>
+          <option value="name">Product Name (A-Z)</option>
+        </select>
+      </div>
+    </div>
+
+    <!-- Product Grid -->
+    <section class="products-marketplace-grid" id="products-marketplace-grid"></section>
+  </main>
+
+  <!-- Footer -->
+  <footer style="background: var(--bg-surface); border-top: 1px solid var(--border-subtle); padding: 32px 24px; text-align: center; color: var(--text-dim); font-size: 0.825rem; margin-top: 40px;">
+    <p>© 2026 <strong>Ranil Systems</strong>. Official Enterprise Surveillance & Industrial Networking Hardware Portal. All rights reserved.</p>
+    <p style="margin-top: 8px; font-size: 0.775rem; color: var(--text-muted);">
+      Direct WhatsApp Quotations &bull; Rapid Pan-India Dispatch &bull; 100% Genuine OEM Hardware & Warranty
+    </p>
+  </footer>
+
+  <!-- ================= DRAWERS & MODALS ================= -->
+
+  <!-- 1. Slide-over Order List Drawer (Cart) -->
+  <div class="drawer-container-overlay" id="cart-drawer-overlay">
+    <div class="drawer-slide-box">
+      <div class="drawer-top-header">
+        <div class="drawer-header-title">
+          <span>Your Order Request</span>
+        </div>
+        <button class="nav-icon-btn" id="cart-drawer-close" style="width: 32px; height: 32px;">✕</button>
+      </div>
+
+      <!-- Line items -->
+      <div class="drawer-content-items" id="cart-items-container"></div>
+
+      <!-- Drawer Bottom -->
+      <div class="drawer-bottom-footer">
+        <div class="drawer-whatsapp-notice">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor" style="flex-shrink: 0; color: var(--whatsapp-color);">
+            <path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981z"/>
+          </svg>
+          <div>
+            <strong>Direct WhatsApp Quotation:</strong> Submit your order list and Ranil Systems will message you directly with the official quotation, bulk discounts, and confirmed delivery schedule.
+          </div>
+        </div>
+
+        <div style="display: flex; justify-content: space-between; font-size: 0.95rem; font-weight: 800; margin-bottom: 14px;">
+          <span>Total Requested:</span>
+          <span id="cart-drawer-total-count" style="color: var(--brand-primary);">2 Units</span>
+        </div>
+
+        <button class="btn-whatsapp-order" id="btn-drawer-proceed-whatsapp" style="width: 100%; padding: 13px; font-size: 0.95rem; border-radius: var(--radius-sm);">
+          Proceed to Order on WhatsApp ➔
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- 2. Slide-over Saved Wishlist Drawer -->
+  <div class="drawer-container-overlay" id="wishlist-drawer-overlay">
+    <div class="drawer-slide-box">
+      <div class="drawer-top-header">
+        <div class="drawer-header-title">
+          <span>Saved Systems</span>
+        </div>
+        <button class="nav-icon-btn" id="wishlist-drawer-close" style="width: 32px; height: 32px;">✕</button>
+      </div>
+      <div class="drawer-content-items" id="wishlist-items-container"></div>
+    </div>
+  </div>
+
+  <!-- 3. Technical Specifications Modal (Amazon / Flipkart Style) -->
+  <div class="modal-overlay-bg" id="product-specs-modal">
+    <div class="product-detail-modal-card">
+      <button class="modal-dismiss-btn" title="Close">✕</button>
+
+      <!-- Gallery Column -->
+      <div class="modal-gallery-column">
+        <div class="gallery-main-view">
+          <img src="" id="modal-main-gallery-img" class="gallery-main-img" alt="Product View">
+        </div>
+        <div style="font-size: 0.75rem; color: var(--text-dim); text-align: center;">Verified Ranil Systems Hardware</div>
+      </div>
+
+      <!-- Specs & Details Column -->
+      <div class="modal-specs-column">
+        <span class="specs-category-title" id="modal-category-text">CCTV Surveillance</span>
+        <h2 class="specs-product-title" id="modal-title-text">Product Title</h2>
+        
+        <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 8px;">
+          <span class="rating-badge-green" id="modal-rating-badge">4.8 ★</span>
+          <span class="rating-count-text" id="modal-reviews-text">(342 ratings)</span>
+          <span class="specs-stock-pill" id="modal-stock-text">✓ In Stock</span>
+        </div>
+
+        <!-- Pricing Notice Block -->
+        <div class="specs-price-box">
+          <div style="font-size: 0.95rem; font-weight: 800; color: #047857;">
+            💬 Custom Price Quote on WhatsApp
+          </div>
+          <div style="font-size: 0.75rem; color: #065f46; margin-top: 2px;">
+            *Official quotation, GST invoice & delivery date provided directly on WhatsApp based on requirement.
+          </div>
+        </div>
+
+        <p class="specs-desc-text" id="modal-desc-paragraph"></p>
+
+        <!-- Variant Options -->
+        <div class="variant-selector-group">
+          <label class="variant-label">Color / Finish:</label>
+          <div class="variant-options-row" id="modal-color-options"></div>
+        </div>
+
+        <div class="variant-selector-group">
+          <label class="variant-label">Specification / Lens:</label>
+          <div class="variant-options-row" id="modal-size-options"></div>
+        </div>
+
+        <!-- Specifications Table -->
+        <div style="margin-top: 10px;">
+          <div class="specs-table-title">Technical Specifications</div>
+          <table class="product-specs-table">
+            <tbody id="modal-specs-table-body"></tbody>
+          </table>
+        </div>
+
+        <!-- Modal Bottom Actions -->
+        <div class="modal-bottom-actions">
+          <button class="cart-order-btn" id="modal-add-to-cart-btn" style="flex: 1; justify-content: center;">
+            + Add to Order List
+          </button>
+          <a class="btn-whatsapp-order" id="modal-whatsapp-direct-btn" href="#" target="_blank" rel="noopener" style="flex: 1; padding: 12px; font-size: 0.9rem;">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981z"/>
+            </svg>
+            <span>Ask Price on WhatsApp</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 4. Customer Order Submission Modal -->
+  <div class="modal-overlay-bg" id="order-submission-modal">
+    <div class="order-form-modal-card">
+      <div class="order-form-header">
+        <h3 style="font-size: 1.15rem; font-weight: 800;">Place Order with Ranil Systems</h3>
+        <button class="nav-icon-btn order-form-dismiss" style="width: 30px; height: 30px;">✕</button>
+      </div>
+
+      <form id="marketplace-order-form">
+        <div class="order-form-body">
+          <div style="background: var(--bg-subtle); padding: 12px 16px; border-radius: var(--radius-sm); border: 1px solid var(--border-subtle); display: flex; justify-content: space-between; align-items: center;">
+            <span style="font-size: 0.85rem; color: var(--text-muted);">Selected Items: <strong id="form-summary-units" style="color: var(--text-main);">2 Units</strong></span>
+            <span style="font-size: 0.85rem; font-weight: 800; color: #047857;">💬 Price on WhatsApp Quote</span>
+          </div>
+
+          <h4 style="font-size: 0.9rem; font-weight: 800; text-transform: uppercase; color: var(--brand-primary); margin-top: 4px;">
+            1. Your Contact & Delivery Details
+          </h4>
+
+          <div class="form-grid-two">
+            <div class="input-field-group">
+              <label class="input-label-text">Full Name *</label>
+              <input type="text" class="input-text-ctrl" id="cust-name" placeholder="e.g. Ramesh Kumar" required>
+            </div>
+            <div class="input-field-group">
+              <label class="input-label-text">WhatsApp Phone Number *</label>
+              <input type="tel" class="input-text-ctrl" id="cust-phone" placeholder="e.g. +91 98765 43210" required>
+            </div>
+          </div>
+
+          <div class="form-grid-two">
+            <div class="input-field-group">
+              <label class="input-label-text">Company / Firm Name (Optional)</label>
+              <input type="text" class="input-text-ctrl" id="cust-company" placeholder="e.g. TechCorp Solutions Ltd.">
+            </div>
+            <div class="input-field-group">
+              <label class="input-label-text">City & State *</label>
+              <input type="text" class="input-text-ctrl" id="cust-city" placeholder="e.g. Mumbai, Maharashtra" required>
+            </div>
+          </div>
+
+          <h4 style="font-size: 0.9rem; font-weight: 800; text-transform: uppercase; color: var(--brand-primary); margin-top: 8px;">
+            2. Delivery Preference
+          </h4>
+
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px;">
+            <label style="border: 1px solid var(--border-strong); padding: 10px; border-radius: var(--radius-sm); font-size: 0.8rem; display: flex; align-items: center; gap: 8px; cursor: pointer; font-weight: 600;">
+              <input type="radio" name="delivery_pref" value="Standard Courier Dispatch" checked>
+              <span>🚚 Standard Courier Delivery</span>
+            </label>
+            <label style="border: 1px solid var(--border-strong); padding: 10px; border-radius: var(--radius-sm); font-size: 0.8rem; display: flex; align-items: center; gap: 8px; cursor: pointer; font-weight: 600;">
+              <input type="radio" name="delivery_pref" value="Urgent / Priority Express">
+              <span>⚡ Priority Express Dispatch</span>
+            </label>
+            <label style="border: 1px solid var(--border-strong); padding: 10px; border-radius: var(--radius-sm); font-size: 0.8rem; display: flex; align-items: center; gap: 8px; cursor: pointer; font-weight: 600;">
+              <input type="radio" name="delivery_pref" value="Delivery + On-Site Installation">
+              <span>🔧 Delivery + Site Installation</span>
+            </label>
+            <label style="border: 1px solid var(--border-strong); padding: 10px; border-radius: var(--radius-sm); font-size: 0.8rem; display: flex; align-items: center; gap: 8px; cursor: pointer; font-weight: 600;">
+              <input type="radio" name="delivery_pref" value="Bulk Commercial Quote">
+              <span>🏢 Bulk Commercial Quote</span>
+            </label>
+          </div>
+
+          <div class="input-field-group">
+            <label class="input-label-text">Project Notes or Specific Inquiries (Optional)</label>
+            <textarea class="input-text-ctrl" id="cust-notes" rows="2" placeholder="e.g. Need GST tax invoice, need quotation for 10 units..."></textarea>
+          </div>
+        </div>
+
+        <div style="padding: 16px 24px; border-top: 1px solid var(--border-subtle); background: var(--bg-subtle); display: flex; justify-content: flex-end; gap: 10px;">
+          <button type="button" class="nav-icon-btn order-form-dismiss" style="width: auto; padding: 0 16px;">Cancel</button>
+          <button type="submit" class="btn-whatsapp-order" style="padding: 10px 20px; font-size: 0.925rem;">
+            Send Order on WhatsApp 📱
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- 5. Order Confirmed Modal -->
+  <div class="modal-overlay-bg" id="order-confirmed-modal">
+    <div class="order-form-modal-card" style="text-align: center; padding: 32px 24px;">
+      <div style="font-size: 3rem; margin-bottom: 8px;">🚀</div>
+      <h2 style="font-size: 1.45rem; font-weight: 800; margin-bottom: 6px;">Order Transmitted to Ranil Systems!</h2>
+      <p style="color: var(--text-muted); font-size: 0.875rem; margin-bottom: 20px;">
+        Your order details have been packaged and WhatsApp was opened. Ranil Systems will review your item list and reply promptly with your quotation and delivery date.
+      </p>
+
+      <div style="background: var(--bg-subtle); border: 1px solid var(--border-subtle); border-radius: var(--radius-md); padding: 14px 18px; text-align: left; font-size: 0.825rem; margin-bottom: 20px;">
+        <div style="display: flex; justify-content: space-between; margin-bottom: 4px;">
+          <span style="color: var(--text-dim);">Reference Inquiry:</span>
+          <strong id="conf-ref-id" style="color: var(--brand-primary); font-family: var(--font-mono);">RS-XXXXXX</strong>
+        </div>
+        <div style="display: flex; justify-content: space-between; margin-bottom: 4px;">
+          <span style="color: var(--text-dim);">Customer:</span>
+          <span id="conf-cust-name">Name</span>
+        </div>
+        <div style="display: flex; justify-content: space-between; margin-bottom: 4px;">
+          <span style="color: var(--text-dim);">WhatsApp:</span>
+          <span id="conf-cust-phone">Phone</span>
+        </div>
+        <div style="display: flex; justify-content: space-between;">
+          <span style="color: var(--text-dim);">Destination:</span>
+          <span id="conf-cust-dest">City</span>
+        </div>
+      </div>
+
+      <div style="display: flex; gap: 10px;">
+        <a class="btn-whatsapp-order" id="conf-manual-wa-link" href="#" target="_blank" rel="noopener" style="flex: 1; padding: 12px; font-size: 0.9rem;">
+          Re-open WhatsApp Message 💬
+        </a>
+        <button class="nav-icon-btn order-form-dismiss" style="width: auto; padding: 0 16px;">
+          Done
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Toast Notification Hub -->
+  <div class="toast-container" id="toast-container"></div>
+
+  <!-- Scripts -->
+  <script src="js/products.js"></script>
+  <script src="js/cart.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>

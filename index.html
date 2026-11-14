@@ -243,6 +243,144 @@
             color: white;
         }
 
+        /* Shopping & Order Action Buttons */
+        .btn-shopping-header {
+            background: linear-gradient(135deg, #f59e0b, #d97706);
+            color: #0f172a;
+            padding: 0.6rem 1.3rem;
+            border-radius: var(--radius-full);
+            text-decoration: none;
+            font-size: 0.88rem;
+            font-weight: 800;
+            transition: var(--transition-smooth);
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            box-shadow: 0 4px 16px rgba(245, 158, 11, 0.4);
+        }
+
+        .btn-shopping-header:hover {
+            background: linear-gradient(135deg, #fbbf24, #f59e0b);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(245, 158, 11, 0.55);
+            color: #0f172a;
+        }
+
+        .nav-shopping-link {
+            color: #fbbf24 !important;
+            font-weight: 700 !important;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .nav-shopping-link::after {
+            background: #f59e0b !important;
+        }
+
+        .btn-cta-shopping {
+            background: linear-gradient(135deg, #f59e0b, #d97706);
+            color: #0f172a;
+            padding: 0.95rem 2rem;
+            border-radius: var(--radius-full);
+            text-decoration: none;
+            font-weight: 800;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            box-shadow: 0 10px 25px rgba(245, 158, 11, 0.4);
+            transition: var(--transition-smooth);
+        }
+
+        .btn-cta-shopping:hover {
+            background: linear-gradient(135deg, #fbbf24, #f59e0b);
+            transform: translateY(-3px);
+            box-shadow: 0 16px 32px rgba(245, 158, 11, 0.55);
+            color: #0f172a;
+        }
+
+        .floating-shopping-btn {
+            position: fixed;
+            bottom: 24px;
+            left: 24px;
+            z-index: 999;
+            background: linear-gradient(135deg, #f59e0b, #d97706);
+            color: #0f172a;
+            padding: 12px 22px;
+            border-radius: var(--radius-full);
+            font-size: 0.9rem;
+            font-weight: 800;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            text-decoration: none;
+            box-shadow: 0 8px 25px rgba(245, 158, 11, 0.5);
+            transition: var(--transition-smooth);
+            border: 2px solid rgba(255, 255, 255, 0.25);
+            animation: bounceSubtle 3s infinite ease-in-out;
+        }
+
+        @keyframes bounceSubtle {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-4px); }
+        }
+
+        .floating-shopping-btn:hover {
+            transform: translateY(-4px) scale(1.04);
+            box-shadow: 0 14px 35px rgba(245, 158, 11, 0.65);
+            background: linear-gradient(135deg, #fbbf24, #f59e0b);
+            color: #0f172a;
+        }
+
+        .products-catalog-banner {
+            margin-top: 45px;
+            text-align: center;
+            background: radial-gradient(circle at 50% 0%, rgba(245, 158, 11, 0.12), transparent 70%),
+                        linear-gradient(135deg, #0d1527, #151f38);
+            border: 1px solid rgba(245, 158, 11, 0.35);
+            border-radius: var(--radius-xl);
+            padding: 36px 24px;
+            box-shadow: var(--shadow-card);
+        }
+
+        .catalog-banner-tag {
+            background: rgba(245, 158, 11, 0.18);
+            color: #fbbf24;
+            font-size: 0.775rem;
+            font-weight: 800;
+            padding: 4px 14px;
+            border-radius: var(--radius-full);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            display: inline-block;
+            margin-bottom: 12px;
+            border: 1px solid rgba(245, 158, 11, 0.3);
+        }
+
+        .catalog-banner-title {
+            color: #ffffff;
+            font-size: 1.55rem;
+            font-weight: 800;
+            margin-bottom: 10px;
+        }
+
+        .catalog-banner-sub {
+            color: #94a3b8;
+            font-size: 0.95rem;
+            max-width: 680px;
+            margin: 0 auto 22px;
+            line-height: 1.6;
+        }
+
+        @media (max-width: 600px) {
+            .floating-shopping-btn {
+                bottom: 16px;
+                left: 16px;
+                padding: 10px 16px;
+                font-size: 0.8rem;
+            }
+        }
+
         .mobile-toggle {
             display: none;
             background: transparent;
@@ -1427,6 +1565,12 @@
             <span><i class="fa-solid fa-location-dot"></i> Virar West Near VIVA College, Palghar / Mumbai</span>
         </div>
         <div class="top-bar-right">
+            <a href="web-application/index.html" target="_blank" style="color: #fbbf24; font-weight: 700;">
+                <i class="fa-solid fa-cart-shopping"></i> Shopping / Order Store
+            </a>
+            <!-- <a href="web-application/admin.html" target="_blank" style="color: #cbd5e1; font-size: 0.775rem;">
+                <i class="fa-solid fa-lock"></i> Admin Portal -->
+            </a>
             <a href="tel:+919284676951"><i class="fa-solid fa-phone"></i> +91 9284676951</a>
             <a href="mailto:ranilsystem@gmail.com"><i class="fa-solid fa-envelope"></i> ranilsystem@gmail.com</a>
         </div>
@@ -1450,10 +1594,14 @@
                 <li><a href="#packages">Packages</a></li>
                 <li><a href="#why-us">Why Us</a></li>
                 <li><a href="#contact">Contact</a></li>
+                <li><a href="web-application/index.html" target="_blank" class="nav-shopping-link"><i class="fa-solid fa-cart-shopping"></i> Shopping / Order</a></li>
             </ul>
         </nav>
 
         <div class="header-actions">
+            <a href="web-application/index.html" target="_blank" class="btn-shopping-header" id="btn-shopping-nav" title="Online Shopping & Direct Order Store">
+                <i class="fa-solid fa-cart-shopping"></i> Shopping / Order
+            </a>
             <a href="#contact" class="btn-outline-header">
                 <i class="fa-solid fa-calendar-check"></i> Book Survey
             </a>
@@ -1471,6 +1619,8 @@
     <div class="mobile-menu" id="mobile-menu">
         <ul>
             <li><a href="#home" class="mobile-link">Home</a></li>
+            <li><a href="web-application/index.html" target="_blank" class="mobile-link" style="color: #fbbf24; font-weight: 800;"><i class="fa-solid fa-cart-shopping"></i> 🛒 Shopping / Order Store</a></li>
+            <li><a href="web-application/admin.html" target="_blank" class="mobile-link" style="color: #cbd5e1; font-size: 0.9rem;"><i class="fa-solid fa-lock"></i> ⚙️ Owner Admin Portal</a></li>
             <li><a href="#services" class="mobile-link">Services</a></li>
             <li><a href="#products" class="mobile-link">Products</a></li>
             <li><a href="#packages" class="mobile-link">Packages</a></li>
@@ -1478,6 +1628,12 @@
             <li><a href="#contact" class="mobile-link">Contact</a></li>
         </ul>
         <div class="mobile-menu-actions">
+            <a href="web-application/index.html" target="_blank" class="btn-cta-shopping" style="justify-content: center;">
+                <i class="fa-solid fa-cart-shopping"></i> Open Shopping / Order Store
+            </a>
+            <a href="web-application/admin.html" target="_blank" class="btn-cta-secondary" style="justify-content: center; color: #f59e0b; border-color: rgba(245, 158, 11, 0.35);">
+                <i class="fa-solid fa-lock"></i> Admin Portal (Orders & Upload)
+            </a>
             <a href="#packages" class="btn-cta-secondary" style="justify-content: center;">
                 <i class="fa-solid fa-boxes-packing"></i> View Packages
             </a>
@@ -1498,6 +1654,9 @@
                 <p>Complete sales, clean concealed installation, and dependable AMC maintenance for homes, retail stores, offices, and industrial premises.</p>
                 
                 <div class="hero-cta-group">
+                    <a href="web-application/index.html" target="_blank" class="btn-cta-shopping">
+                        <i class="fa-solid fa-cart-shopping"></i> Shopping / Order Store
+                    </a>
                     <a href="#contact" class="btn-cta-primary">
                         <i class="fa-solid fa-calendar-check"></i> Book Free Site Survey
                     </a>
@@ -1570,6 +1729,7 @@
             <div class="brand-badge"><i class="fa-solid fa-video"></i> HIKVISION</div>
             <div class="brand-badge"><i class="fa-solid fa-camera"></i> CP PLUS</div>
             <div class="brand-badge"><i class="fa-solid fa-eye"></i> DAHUA</div>
+            <div class="brand-badge"><i class="fa-solid fa-camera"></i> PRAMA</div>
             <div class="brand-badge"><i class="fa-solid fa-network-wired"></i> EZVIZ</div>
             <div class="brand-badge"><i class="fa-solid fa-wifi"></i> TP-LINK TAPO</div>
             <div class="brand-badge"><i class="fa-solid fa-hard-drive"></i> SEAGATE SKYHAWK</div>
@@ -1826,6 +1986,16 @@
                         </div>
                     </div>
                 </div>
+            </div>
+
+            <!-- Online Hardware Store Banner -->
+            <div class="products-catalog-banner reveal">
+                <span class="catalog-banner-tag">★ Dedicated Hardware Marketplace</span>
+                <h3 class="catalog-banner-title">Need 4K Cameras, PoE Switches, NVRs or Custom Hardware?</h3>
+                <p class="catalog-banner-sub">Browse our dedicated web application with zero customer prices, build your custom equipment quote list, and transmit inquiries directly on WhatsApp for best wholesale rates and pan-India dispatch.</p>
+                <a href="web-application/index.html" target="_blank" class="btn-cta-shopping">
+                    <i class="fa-solid fa-cart-shopping"></i> Open Shopping / Order Store
+                </a>
             </div>
         </div>
     </section>
@@ -2133,6 +2303,8 @@
                 <h4>Quick Navigation</h4>
                 <ul class="footer-links">
                     <li><a href="#home">Home</a></li>
+                    <li><a href="web-application/index.html" target="_blank" style="color: #fbbf24; font-weight: 700;"><i class="fa-solid fa-cart-shopping"></i> Shopping & Order Store</a></li>
+                    <li><a href="web-application/admin.html" target="_blank" style="color: #94a3b8;"><i class="fa-solid fa-lock"></i> Owner Admin Portal</a></li>
                     <li><a href="#services">Security Services</a></li>
                     <li><a href="#products">Hardware Catalog</a></li>
                     <li><a href="#packages">CCTV Price Packages</a></li>
@@ -2152,6 +2324,11 @@
 
         <div class="footer-bottom">
             <div>&copy; 2026 Ranil Systems. All rights reserved. CCTV Sales & Security Solutions.</div>
+            <div style="display: flex; gap: 14px; align-items: center; justify-content: center; flex-wrap: wrap; margin: 8px 0;">
+                <a href="web-application/index.html" target="_blank" style="color: #60a5fa; text-decoration: none; font-size: 0.85rem;"><i class="fa-solid fa-cart-shopping"></i> Customer Shopping & Order Store</a>
+                <span style="color: #475569;">•</span>
+                <a href="web-application/admin.html" target="_blank" style="color: #f59e0b; text-decoration: none; font-size: 0.85rem;"><i class="fa-solid fa-lock"></i> Owner Admin & Orders Portal</a>
+            </div>
             <div>Built for precision security & surveillance.</div>
         </div>
     </footer>
@@ -2159,6 +2336,12 @@
     <!-- Floating Action WhatsApp Button -->
     <a href="https://wa.me/919284676951?text=Hello%20Ranil%20Systems,%20I%20would%20like%20to%20inquire%20about%20CCTV%20services." target="_blank" class="floating-wa-btn" aria-label="Chat on WhatsApp">
         <i class="fa-brands fa-whatsapp"></i>
+    </a>
+
+    <!-- Floating Action Shopping & Order Button (Bottom-Left) -->
+    <a href="web-application/index.html" target="_blank" class="floating-shopping-btn" aria-label="Open Shopping / Order Portal" title="Shop Hardware & Place Quotation Order">
+        <i class="fa-solid fa-cart-shopping"></i>
+        <span>Shopping / Order</span>
     </a>
 
     <!-- Scripts -->

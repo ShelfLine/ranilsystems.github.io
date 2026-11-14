@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ranil Systems — Admin Portal & Orders Management Console</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>⚡</text></svg>">
+</head>
+<body class="admin-body-bg">
+
+  <!-- Admin Top Navigation Bar -->
+  <header class="admin-topbar">
+    <div class="admin-topbar-inner">
+      <div class="admin-brand-cluster">
+        <a href="index.html" class="admin-logo-mark" title="Back to Customer Web App">
+          <span class="brand-badge" style="background: linear-gradient(135deg, #f59e0b, #d97706); color: #0f172a; font-weight: 900;">RS</span>
+        </a>
+        <div class="admin-title-meta">
+          <div class="admin-title-row">
+            <h1 class="admin-main-heading">Ranil Systems Console</h1>
+            <span class="admin-badge-live">● System Active</span>
+          </div>
+          <p class="admin-subheading">Orders Tracking, Camera Uploader & Quotation Manager</p>
+        </div>
+      </div>
+
+      <div class="admin-header-actions">
+        <a href="index.html" class="btn-view-store">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+            <polyline points="15 3 21 3 21 9"></polyline>
+            <line x1="10" y1="14" x2="21" y2="3"></line>
+          </svg>
+          <span>View Customer Store</span>
+        </a>
+        <a href="../index.html" class="btn-view-store" style="background: rgba(255, 255, 255, 0.05);">
+          <span>🏠 Main Website</span>
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Container -->
+  <main class="admin-main-shell">
+
+    <!-- KPI Summary Grid (Orders Overview) -->
+    <section class="kpi-dashboard-grid">
+      <div class="kpi-stat-card card-total">
+        <div class="kpi-icon-box">📦</div>
+        <div class="kpi-data">
+          <span class="kpi-stat-label">Total Orders Received</span>
+          <div class="kpi-stat-value" id="kpi-total-orders">0</div>
+          <span class="kpi-stat-hint">All inquiries logged</span>
+        </div>
+      </div>
+
+      <div class="kpi-stat-card card-pending">
+        <div class="kpi-icon-box">⏳</div>
+        <div class="kpi-data">
+          <span class="kpi-stat-label">Pending Quotes</span>
+          <div class="kpi-stat-value text-amber" id="kpi-pending-orders">0</div>
+          <span class="kpi-stat-hint">Awaiting price & delivery</span>
+        </div>
+      </div>
+
+      <div class="kpi-stat-card card-quoted">
+        <div class="kpi-icon-box">💬</div>
+        <div class="kpi-data">
+          <span class="kpi-stat-label">Quoted on WhatsApp</span>
+          <div class="kpi-stat-value text-blue" id="kpi-quoted-orders">0</div>
+          <span class="kpi-stat-hint">Quotes sent to customer</span>
+        </div>
+      </div>
+
+      <div class="kpi-stat-card card-delivered">
+        <div class="kpi-icon-box">✅</div>
+        <div class="kpi-data">
+          <span class="kpi-stat-label">Delivered & Closed</span>
+          <div class="kpi-stat-value text-green" id="kpi-delivered-orders">0</div>
+          <span class="kpi-stat-hint">Successfully fulfilled</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- Navigation Tabs Strip -->
+    <nav class="admin-tabs-nav">
+      <button class="admin-nav-tab active" data-tab="orders">
+        <span>📦</span>
+        <span>Orders & Inquiries</span>
+        <span class="admin-badge-count" id="nav-pending-badge" style="display: none;">0</span>
+      </button>
+
+      <button class="admin-nav-tab" data-tab="uploader">
+        <span>📷</span>
+        <span>Upload New Camera</span>
+      </button>
+
+      <button class="admin-nav-tab" data-tab="inventory">
+        <span>📋</span>
+        <span>Active Catalog</span>
+      </button>
+
+      <button class="admin-nav-tab" data-tab="settings">
+        <span>⚙️</span>
+        <span>Business Phone</span>
+      </button>
+    </nav>
+
+    <!-- Tab View 1: Orders Tracking Dashboard -->
+    <section class="admin-tab-view active" id="tab-orders">
+      <div class="orders-hub-header">
+        <div class="orders-hub-title-box">
+          <h2 class="orders-view-title">Customer Orders & Quotation Dispatch</h2>
+          <p class="orders-view-subtitle">Review incoming orders, view customer address, and click to reply with price & delivery schedule on WhatsApp.</p>
+        </div>
+
+        <div class="orders-search-wrapper">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" class="search-svg-icon">
+            <circle cx="11" cy="11" r="8"></circle>
+            <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+          </svg>
+          <input type="text" id="admin-order-search" class="admin-search-input" placeholder="Search by Order ID, Customer name, Phone, City...">
+        </div>
+      </div>
+
+      <!-- Filter Chips -->
+      <div class="order-filter-chips-row">
+        <button class="order-filter-chip active" data-status="all">All Orders</button>
+        <button class="order-filter-chip" data-status="Pending">⏳ Pending Quotes</button>
+        <button class="order-filter-chip" data-status="Quoted">💬 Quoted</button>
+        <button class="order-filter-chip" data-status="Dispatched">🚚 Dispatched</button>
+        <button class="order-filter-chip" data-status="Delivered">✅ Delivered</button>
+        <button class="order-filter-chip" data-status="Cancelled">✕ Cancelled</button>
+      </div>
+
+      <!-- Orders Dynamic List -->
+      <div class="admin-orders-stream" id="admin-orders-list">
+        <!-- Rendered dynamically by AdminApp.renderOrdersHub() -->
+      </div>
+    </section>
+
+    <!-- Tab View 2: Camera & Equipment Upload Studio -->
+    <section class="admin-tab-view" id="tab-uploader">
+      <div class="studio-card">
+        <div class="studio-header">
+          <div class="studio-header-icon">📷</div>
+          <div>
+            <h2 class="studio-title">Upload New Camera or Networking System</h2>
+            <p class="studio-desc">Fill in equipment specifications and upload photos. Newly added cameras will appear immediately on the customer-facing web application without customer prices.</p>
+          </div>
+        </div>
+
+        <form id="camera-upload-form" class="studio-form-body">
+          <!-- Two Column Main Metadata -->
+          <div class="form-grid-two">
+            <div class="input-field-group">
+              <label class="input-label-text">Product / Camera Name <span class="text-danger">*</span></label>
+              <input type="text" class="input-text-ctrl" id="cam-name" placeholder="e.g. Ranil Pro 8MP 4K ColorHunter Bullet Camera" required>
+            </div>
+
+            <div class="input-field-group">
+              <label class="input-label-text">Model Number <span class="text-danger">*</span></label>
+              <input type="text" class="input-text-ctrl font-mono" id="cam-model" placeholder="e.g. RS-IPC-8MP-BLT-COLOR" required>
+            </div>
+          </div>
+
+          <div class="form-grid-three">
+            <div class="input-field-group">
+              <label class="input-label-text">Hardware Category</label>
+              <select class="input-text-ctrl" id="cam-category">
+                <option value="cctv">📹 CCTV & Surveillance</option>
+                <option value="networking">🖧 Enterprise Networking</option>
+                <option value="power">⚡ Power & Online UPS</option>
+                <option value="access">👤 Biometric & Access Control</option>
+                <option value="iot">🌡️ Facility IoT & Cables</option>
+              </select>
+            </div>
+
+            <div class="input-field-group">
+              <label class="input-label-text">Stock Availability</label>
+              <select class="input-text-ctrl" id="cam-stock">
+                <option value="In Stock (Ready to Dispatch)">✓ In Stock (Ready to Dispatch)</option>
+                <option value="Low Stock (High Demand)">⚠️ Low Stock (High Demand)</option>
+                <option value="Custom Order / Project Dispatch">📦 Custom Order / Project Dispatch</option>
+                <option value="Pre-Order Available">⏳ Pre-Order Available</option>
+              </select>
+            </div>
+
+            <div class="input-field-group">
+              <label class="input-label-text">Marketing Badge Tag</label>
+              <input type="text" class="input-text-ctrl" id="cam-badge" placeholder="e.g. 4K Starlight, AI Human Detect, Bestseller">
+            </div>
+          </div>
+
+          <!-- Photo Upload Dropzone -->
+          <div class="uploader-image-section">
+            <label class="input-label-text">Camera Photo / System Image</label>
+            <div class="camera-dropzone-box" id="cam-dropzone">
+              <div class="dropzone-empty-icon">📁</div>
+              <strong>Click to browse or drag & drop camera image here</strong>
+              <p class="dropzone-sub">PNG, JPG, WebP supported. Photo will be saved and rendered automatically in the live store.</p>
+              <input type="file" id="cam-file-input" accept="image/*" style="display: none;">
+              <img id="cam-preview-img" class="cam-preview-frame" alt="Preview Image">
+            </div>
+
+            <div class="image-fallback-row">
+              <span class="fallback-label">Or direct image web URL:</span>
+              <input type="url" class="input-text-ctrl" id="cam-img-url" placeholder="https://images.unsplash.com/photo-...">
+            </div>
+          </div>
+
+          <!-- Highlights -->
+          <div class="input-field-group">
+            <label class="input-label-text">Key Features & Highlights (Comma Separated)</label>
+            <input type="text" class="input-text-ctrl" id="cam-highlights" placeholder="e.g. 8MP 4K Ultra-HD, 50m Color Night Vision, Built-in Mic & Speaker, IP67 Weatherproof">
+            <span class="field-hint">These bullet points appear on the customer product card.</span>
+          </div>
+
+          <!-- Technical Specifications Matrix -->
+          <div class="spec-matrix-box">
+            <div class="spec-matrix-header">
+              <span class="spec-matrix-icon">⚙️</span>
+              <span class="spec-matrix-title">Technical Specifications (Shown in Customer Spec Table)</span>
+            </div>
+
+            <div class="form-grid-two">
+              <div class="input-field-group">
+                <label class="input-label-text">Max Resolution</label>
+                <input type="text" class="input-text-ctrl" id="cam-spec-res" placeholder="e.g. 3840 x 2160 pixels @ 30fps (8MP 4K)">
+              </div>
+              <div class="input-field-group">
+                <label class="input-label-text">Image Sensor</label>
+                <input type="text" class="input-text-ctrl" id="cam-spec-sensor" placeholder="e.g. 1/2.8 Progressive Scan Sony STARVIS CMOS">
+              </div>
+            </div>
+
+            <div class="form-grid-two" style="margin-top: 10px;">
+              <div class="input-field-group">
+                <label class="input-label-text">Lens Specification</label>
+                <input type="text" class="input-text-ctrl" id="cam-spec-lens" placeholder="e.g. 2.8mm / 4.0mm Fixed Lens (105° FOV)">
+              </div>
+              <div class="input-field-group">
+                <label class="input-label-text">Night Vision Range</label>
+                <input type="text" class="input-text-ctrl" id="cam-spec-nv" placeholder="e.g. 50m Smart IR + Warm LED 24/7 Full Color">
+              </div>
+            </div>
+
+            <div class="form-grid-two" style="margin-top: 10px;">
+              <div class="input-field-group">
+                <label class="input-label-text">Power Input / PoE</label>
+                <input type="text" class="input-text-ctrl" id="cam-spec-poe" placeholder="e.g. Power over Ethernet (PoE 802.3af) or 12V DC">
+              </div>
+              <div class="input-field-group">
+                <label class="input-label-text">Warranty Period</label>
+                <input type="text" class="input-text-ctrl" id="cam-spec-warranty" placeholder="e.g. 2 Years Replacement Warranty by Ranil Systems">
+              </div>
+            </div>
+          </div>
+
+          <!-- Description -->
+          <div class="input-field-group">
+            <label class="input-label-text">Product Overview & Detailed Description</label>
+            <textarea class="input-text-ctrl" id="cam-desc" rows="3" placeholder="Explain performance, suitable commercial applications, casing material, and compliance..."></textarea>
+          </div>
+
+          <!-- Submit Buttons -->
+          <div class="studio-actions-row">
+            <button type="reset" class="btn-action-secondary">Clear Form</button>
+            <button type="submit" class="btn-publish-camera">
+              <span>🚀</span>
+              <span>Publish Camera to Live Store</span>
+            </button>
+          </div>
+        </form>
+      </div>
+    </section>
+
+    <!-- Tab View 3: Active Catalog & Inventory -->
+    <section class="admin-tab-view" id="tab-inventory">
+      <div class="studio-card">
+        <div class="inventory-bar-header">
+          <div>
+            <h2 class="studio-title">Active Store Catalog (<span id="inventory-total-count">0 Products</span>)</h2>
+            <p class="studio-desc">Manage existing products published in the Ranil Systems catalog. You can delete items or restore original factory presets.</p>
+          </div>
+
+          <button class="btn-action-secondary" id="btn-reset-catalog" title="Reset back to factory defaults">
+            🔄 Reset to Defaults
+          </button>
+        </div>
+
+        <div class="inventory-table-container">
+          <table class="admin-data-table">
+            <thead>
+              <tr>
+                <th style="width: 70px;">Photo</th>
+                <th>Product Name & Model</th>
+                <th>Category</th>
+                <th>Stock Availability</th>
+                <th style="text-align: right;">Action</th>
+              </tr>
+            </thead>
+            <tbody id="inventory-table-body">
+              <!-- Rendered dynamically by AdminApp.renderInventoryTable() -->
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- Tab View 4: Business Settings -->
+    <section class="admin-tab-view" id="tab-settings">
+      <div class="studio-card" style="max-width: 640px; margin: 0 auto;">
+        <div class="studio-header">
+          <div class="studio-header-icon">⚙️</div>
+          <div>
+            <h2 class="studio-title">Business WhatsApp Settings</h2>
+            <p class="studio-desc">Configure your business WhatsApp phone number. Customer inquiries and quotation orders placed on the website will be sent directly to this number.</p>
+          </div>
+        </div>
+
+        <form id="admin-settings-form" class="studio-form-body">
+          <div class="input-field-group">
+            <label class="input-label-text">Recipient WhatsApp Number (with Country Code):</label>
+            <input type="text" class="input-text-ctrl font-mono" id="admin-cfg-phone" placeholder="e.g. 919876543210" required>
+            <span class="field-hint">Include country code without any spaces or plus signs (e.g., <strong>91</strong> for India followed by your 10-digit number).</span>
+          </div>
+
+          <div class="settings-info-card">
+            <div style="font-size: 1.1rem;">💡</div>
+            <div style="font-size: 0.825rem; color: var(--text-dim); line-height: 1.5;">
+              <strong>How it works:</strong> When customers stage equipment on the store and tap "Send Order to WhatsApp", this phone number will receive their exact equipment list, delivery city, and contact details. You can then review the order in this portal and reply with your official quotation.
+            </div>
+          </div>
+
+          <div style="display: flex; justify-content: flex-end; margin-top: 16px;">
+            <button type="submit" class="btn-publish-camera" style="background: var(--brand-primary);">
+              💾 Save Phone Settings
+            </button>
+          </div>
+        </form>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Admin Toast Hub -->
+  <div class="admin-toast-wrapper" id="admin-toast-container"></div>
+
+  <!-- Scripts -->
+  <script src="js/products.js"></script>
+  <script src="js/cart.js"></script>
+  <script src="js/admin.js"></script>
+</body>
+</html>
