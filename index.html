@@ -45,7 +45,13 @@
             padding: 0;
             box-sizing: border-box;
             font-family: 'Plus Jakarta Sans', sans-serif;
+        }
+
+        html {
             scroll-behavior: smooth;
+            -webkit-text-size-adjust: 100%;
+            overflow-x: hidden;
+            width: 100%;
         }
 
         body {
@@ -53,6 +59,9 @@
             color: var(--text-main);
             line-height: 1.6;
             overflow-x: hidden;
+            width: 100%;
+            position: relative;
+            -webkit-overflow-scrolling: touch;
         }
 
         /* Top Announcement Bar */
@@ -301,33 +310,42 @@
 
         .floating-shopping-btn {
             position: fixed;
-            bottom: 24px;
-            left: 24px;
-            z-index: 999;
+            bottom: 95px; /* Placed by default on the right side above WhatsApp button */
+            right: 25px;
+            left: auto;
+            z-index: 1001;
             background: linear-gradient(135deg, #f59e0b, #d97706);
             color: #0f172a;
-            padding: 12px 22px;
+            padding: 11px 20px;
             border-radius: var(--radius-full);
-            font-size: 0.9rem;
+            font-size: 0.88rem;
             font-weight: 800;
             display: inline-flex;
             align-items: center;
-            gap: 10px;
+            gap: 9px;
             text-decoration: none;
             box-shadow: 0 8px 25px rgba(245, 158, 11, 0.5);
-            transition: var(--transition-smooth);
-            border: 2px solid rgba(255, 255, 255, 0.25);
-            animation: bounceSubtle 3s infinite ease-in-out;
+            border: 2px solid rgba(255, 255, 255, 0.35);
+            cursor: grab;
+            user-select: none;
+            -webkit-user-select: none;
+            touch-action: none;
+            transition: box-shadow 0.2s ease, transform 0.2s ease;
+            white-space: nowrap;
         }
 
-        @keyframes bounceSubtle {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-4px); }
+        .floating-shopping-btn:active,
+        .floating-shopping-btn.is-dragging {
+            cursor: grabbing;
+            transform: scale(1.06);
+            box-shadow: 0 16px 36px rgba(245, 158, 11, 0.7);
+            transition: none !important;
+            animation: none !important;
         }
 
-        .floating-shopping-btn:hover {
-            transform: translateY(-4px) scale(1.04);
-            box-shadow: 0 14px 35px rgba(245, 158, 11, 0.65);
+        .floating-shopping-btn:hover:not(.is-dragging) {
+            transform: translateY(-3px) scale(1.03);
+            box-shadow: 0 12px 30px rgba(245, 158, 11, 0.65);
             background: linear-gradient(135deg, #fbbf24, #f59e0b);
             color: #0f172a;
         }
@@ -374,10 +392,10 @@
 
         @media (max-width: 600px) {
             .floating-shopping-btn {
-                bottom: 16px;
-                left: 16px;
-                padding: 10px 16px;
-                font-size: 0.8rem;
+                bottom: 90px;
+                right: 20px;
+                padding: 9px 16px;
+                font-size: 0.82rem;
             }
         }
 
@@ -390,15 +408,18 @@
             cursor: pointer;
         }
 
-        /* Mobile Drawer */
+        /* Mobile Drawer with smooth touch scrolling */
         .mobile-menu {
             display: none;
             position: fixed;
-            top: 75px;
+            top: 72px;
             left: 0;
             right: 0;
+            max-height: calc(100vh - 72px);
+            overflow-y: auto;
+            -webkit-overflow-scrolling: touch;
             background: #0d1527;
-            padding: 1.5rem 5%;
+            padding: 1.5rem 5% 3rem;
             border-bottom: 1px solid rgba(255, 255, 255, 0.1);
             box-shadow: 0 10px 25px rgba(0,0,0,0.4);
             z-index: 999;
@@ -1546,13 +1567,167 @@
         }
 
         @media (max-width: 768px) {
+            /* Fix invisible content on mobile so lines/text are NEVER hidden */
+            .reveal {
+                opacity: 1 !important;
+                transform: none !important;
+                transition: none !important;
+            }
+
+            .container {
+                padding: 0 1.25rem !important;
+                width: 100% !important;
+                box-sizing: border-box !important;
+            }
+
             .top-bar { display: none; }
             .nav-links, .header-actions { display: none; }
             .mobile-toggle { display: block; }
-            .hero h1 { font-size: 2.3rem; }
-            .section-title { font-size: 2rem; }
-            .form-row { grid-template-columns: 1fr; }
-            .footer-grid { grid-template-columns: 1fr; }
+
+            .hero {
+                padding: 5rem 1rem 3rem !important;
+                overflow: visible !important;
+            }
+
+            .hero h1 {
+                font-size: clamp(1.85rem, 6.5vw, 2.3rem) !important;
+                line-height: 1.2 !important;
+                letter-spacing: -0.5px !important;
+                word-break: break-word !important;
+                overflow-wrap: break-word !important;
+                margin-bottom: 1.2rem !important;
+            }
+
+            .hero p {
+                font-size: 1rem !important;
+                line-height: 1.6 !important;
+                margin-bottom: 1.8rem !important;
+            }
+
+            .hero-cta-group {
+                flex-direction: column !important;
+                width: 100% !important;
+                gap: 0.75rem !important;
+            }
+
+            .hero-cta-group a,
+            .hero-cta-group button {
+                width: 100% !important;
+                justify-content: center !important;
+                text-align: center !important;
+                padding: 0.85rem 1.4rem !important;
+                font-size: 0.95rem !important;
+            }
+
+            .hero-highlights {
+                flex-wrap: wrap !important;
+                gap: 1rem !important;
+                justify-content: center !important;
+                padding-top: 1.2rem !important;
+            }
+
+            .highlight-item {
+                font-size: 0.82rem !important;
+            }
+
+            .preview-img-container {
+                height: 250px !important;
+            }
+
+            .floating-stat-card {
+                right: 10px !important;
+                bottom: 10px !important;
+                padding: 0.75rem 1rem !important;
+                box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25) !important;
+            }
+
+            /* Prevent grid cut-offs / clipped text on mobile */
+            .services-grid,
+            .products-grid,
+            .packages-grid {
+                grid-template-columns: 1fr !important;
+                gap: 1.5rem !important;
+            }
+
+            .service-card,
+            .product-card,
+            .package-card {
+                width: 100% !important;
+                min-width: 0 !important;
+                box-sizing: border-box !important;
+            }
+
+            .product-details {
+                padding: 1.3rem !important;
+            }
+
+            .product-details h3 {
+                font-size: 1.15rem !important;
+                word-break: break-word !important;
+            }
+
+            .package-card {
+                padding: 1.8rem 1.25rem !important;
+            }
+
+            .contact-layout {
+                grid-template-columns: 1fr !important;
+                padding: 1.5rem 1.1rem !important;
+                gap: 2rem !important;
+            }
+
+            .form-row { grid-template-columns: 1fr !important; }
+            .footer-grid { grid-template-columns: 1fr !important; gap: 2rem !important; }
+
+            .section-title {
+                font-size: clamp(1.6rem, 6vw, 2rem) !important;
+                word-break: break-word !important;
+            }
+
+            .section-subtitle {
+                font-size: 0.92rem !important;
+                padding: 0 0.5rem !important;
+            }
+
+            .products-catalog-banner {
+                padding: 24px 16px !important;
+            }
+
+            .catalog-banner-title {
+                font-size: 1.25rem !important;
+                line-height: 1.3 !important;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .stats-grid {
+                grid-template-columns: 1fr !important;
+                gap: 1.2rem !important;
+            }
+
+            .stat-box {
+                padding: 1rem !important;
+            }
+
+            .hero-badge {
+                font-size: 0.75rem !important;
+                padding: 0.35rem 0.8rem !important;
+            }
+
+            .floating-wa-btn {
+                width: 52px !important;
+                height: 52px !important;
+                font-size: 1.5rem !important;
+                bottom: 18px !important;
+                right: 18px !important;
+            }
+
+            .floating-shopping-btn {
+                bottom: 82px !important;
+                right: 18px !important;
+                padding: 9px 15px !important;
+                font-size: 0.8rem !important;
+            }
         }
     </style>
 </head>
@@ -1567,9 +1742,6 @@
         <div class="top-bar-right">
             <a href="web-application/index.html" target="_blank" style="color: #fbbf24; font-weight: 700;">
                 <i class="fa-solid fa-cart-shopping"></i> Shopping / Order Store
-            </a>
-            <!-- <a href="web-application/admin.html" target="_blank" style="color: #cbd5e1; font-size: 0.775rem;">
-                <i class="fa-solid fa-lock"></i> Admin Portal -->
             </a>
             <a href="tel:+919284676951"><i class="fa-solid fa-phone"></i> +91 9284676951</a>
             <a href="mailto:ranilsystem@gmail.com"><i class="fa-solid fa-envelope"></i> ranilsystem@gmail.com</a>
@@ -1620,7 +1792,6 @@
         <ul>
             <li><a href="#home" class="mobile-link">Home</a></li>
             <li><a href="web-application/index.html" target="_blank" class="mobile-link" style="color: #fbbf24; font-weight: 800;"><i class="fa-solid fa-cart-shopping"></i> 🛒 Shopping / Order Store</a></li>
-            <li><a href="web-application/admin.html" target="_blank" class="mobile-link" style="color: #cbd5e1; font-size: 0.9rem;"><i class="fa-solid fa-lock"></i> ⚙️ Owner Admin Portal</a></li>
             <li><a href="#services" class="mobile-link">Services</a></li>
             <li><a href="#products" class="mobile-link">Products</a></li>
             <li><a href="#packages" class="mobile-link">Packages</a></li>
@@ -1630,9 +1801,6 @@
         <div class="mobile-menu-actions">
             <a href="web-application/index.html" target="_blank" class="btn-cta-shopping" style="justify-content: center;">
                 <i class="fa-solid fa-cart-shopping"></i> Open Shopping / Order Store
-            </a>
-            <a href="web-application/admin.html" target="_blank" class="btn-cta-secondary" style="justify-content: center; color: #f59e0b; border-color: rgba(245, 158, 11, 0.35);">
-                <i class="fa-solid fa-lock"></i> Admin Portal (Orders & Upload)
             </a>
             <a href="#packages" class="btn-cta-secondary" style="justify-content: center;">
                 <i class="fa-solid fa-boxes-packing"></i> View Packages
@@ -2304,7 +2472,6 @@
                 <ul class="footer-links">
                     <li><a href="#home">Home</a></li>
                     <li><a href="web-application/index.html" target="_blank" style="color: #fbbf24; font-weight: 700;"><i class="fa-solid fa-cart-shopping"></i> Shopping & Order Store</a></li>
-                    <li><a href="web-application/admin.html" target="_blank" style="color: #94a3b8;"><i class="fa-solid fa-lock"></i> Owner Admin Portal</a></li>
                     <li><a href="#services">Security Services</a></li>
                     <li><a href="#products">Hardware Catalog</a></li>
                     <li><a href="#packages">CCTV Price Packages</a></li>
@@ -2324,12 +2491,13 @@
 
         <div class="footer-bottom">
             <div>&copy; 2026 Ranil Systems. All rights reserved. CCTV Sales & Security Solutions.</div>
-            <div style="display: flex; gap: 14px; align-items: center; justify-content: center; flex-wrap: wrap; margin: 8px 0;">
+            <div style="margin: 6px 0;">
                 <a href="web-application/index.html" target="_blank" style="color: #60a5fa; text-decoration: none; font-size: 0.85rem;"><i class="fa-solid fa-cart-shopping"></i> Customer Shopping & Order Store</a>
-                <span style="color: #475569;">•</span>
-                <a href="web-application/admin.html" target="_blank" style="color: #f59e0b; text-decoration: none; font-size: 0.85rem;"><i class="fa-solid fa-lock"></i> Owner Admin & Orders Portal</a>
             </div>
-            <div>Built for precision security & surveillance.</div>
+            <div>
+                <div>Built for precision security & surveillance.</div>
+                <div style="margin-top: 5px; font-weight: 800; font-size: 0.88rem; letter-spacing: 0.3px; background: linear-gradient(90deg, #ff4b72, #a855f7, #3b82f6, #06b6d4, #10b981); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; display: inline-block;">Designed and maintained by Jagdish Moolya</div>
+            </div>
         </div>
     </footer>
 
@@ -2338,14 +2506,92 @@
         <i class="fa-brands fa-whatsapp"></i>
     </a>
 
-    <!-- Floating Action Shopping & Order Button (Bottom-Left) -->
-    <a href="web-application/index.html" target="_blank" class="floating-shopping-btn" aria-label="Open Shopping / Order Portal" title="Shop Hardware & Place Quotation Order">
+    <!-- Floating Action Shopping & Order Button (Moveable Drag & Drop) -->
+    <a href="web-application/index.html" target="_blank" class="floating-shopping-btn" id="draggable-shopping-btn" aria-label="Open Shopping / Order Portal" title="Drag to move or tap to open Store">
+        <i class="fa-solid fa-grip-vertical" style="opacity: 0.6; font-size: 0.8rem; margin-right: -2px;"></i>
         <i class="fa-solid fa-cart-shopping"></i>
         <span>Shopping / Order</span>
     </a>
 
     <!-- Scripts -->
     <script>
+        // Moveable / Draggable Floating Shopping Button
+        (function initDraggableShopping() {
+            const btn = document.getElementById('draggable-shopping-btn');
+            if (!btn) return;
+
+            let isDragging = false;
+            let startX = 0, startY = 0;
+            let initialLeft = 0, initialTop = 0;
+            let hasMoved = false;
+
+            btn.addEventListener('pointerdown', (e) => {
+                if (e.button && e.button !== 0) return;
+                isDragging = true;
+                hasMoved = false;
+                startX = e.clientX;
+                startY = e.clientY;
+
+                const rect = btn.getBoundingClientRect();
+                initialLeft = rect.left;
+                initialTop = rect.top;
+
+                btn.classList.add('is-dragging');
+                try { btn.setPointerCapture(e.pointerId); } catch (err) {}
+            });
+
+            btn.addEventListener('pointermove', (e) => {
+                if (!isDragging) return;
+                const dx = e.clientX - startX;
+                const dy = e.clientY - startY;
+
+                if (!hasMoved && Math.hypot(dx, dy) > 6) {
+                    hasMoved = true;
+                }
+
+                if (hasMoved) {
+                    let newLeft = initialLeft + dx;
+                    let newTop = initialTop + dy;
+
+                    const btnW = btn.offsetWidth;
+                    const btnH = btn.offsetHeight;
+                    const pad = 10;
+
+                    const minX = pad;
+                    const maxX = window.innerWidth - btnW - pad;
+                    const minY = pad;
+                    const maxY = window.innerHeight - btnH - pad;
+
+                    newLeft = Math.max(minX, Math.min(newLeft, maxX));
+                    newTop = Math.max(minY, Math.min(newTop, maxY));
+
+                    btn.style.left = newLeft + 'px';
+                    btn.style.top = newTop + 'px';
+                    btn.style.right = 'auto';
+                    btn.style.bottom = 'auto';
+                }
+            });
+
+            const stopDrag = (e) => {
+                if (!isDragging) return;
+                isDragging = false;
+                btn.classList.remove('is-dragging');
+                try { btn.releasePointerCapture(e.pointerId); } catch (err) {}
+            };
+
+            btn.addEventListener('pointerup', stopDrag);
+            btn.addEventListener('pointercancel', stopDrag);
+
+            // If user moved/dragged the button, prevent opening link
+            btn.addEventListener('click', (e) => {
+                if (hasMoved) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    hasMoved = false;
+                }
+            });
+        })();
+
         // Mobile Navigation Toggle
         const mobileToggle = document.getElementById('mobile-toggle');
         const mobileMenu = document.getElementById('mobile-menu');
@@ -2375,10 +2621,15 @@
 
         // Scroll Intersection Observer for Reveal animations
         document.addEventListener("DOMContentLoaded", function() {
+            // Immediate reveal for mobile to ensure NO lines/cards are hidden
+            if (window.innerWidth <= 768) {
+                document.querySelectorAll('.reveal').forEach(el => el.classList.add('active'));
+            }
+
             const observerOptions = {
                 root: null,
-                rootMargin: '0px',
-                threshold: 0.12
+                rootMargin: '0px 0px 80px 0px',
+                threshold: 0.05
             };
 
             const observer = new IntersectionObserver((entries, obs) => {
